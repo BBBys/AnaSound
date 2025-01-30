@@ -39,3 +39,5 @@
 /Testsignal/bin
 /Testsignal/obj
 /x
+*.pfx
+/ASHilfen/bin

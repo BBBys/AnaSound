@@ -282,7 +282,7 @@ namespace AnaSound
         case "z":
           akfTyp = AKFTyp.amZeit;
           break;
-        case "f":
+        case "fq":
           akfTyp = AKFTyp.amFrequenz;
           break;
         case "w":
