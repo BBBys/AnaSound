@@ -13,24 +13,24 @@ namespace ASHilfen
   {
     public enum FensterTyp
     {
-      ftNone, ftCos2,
+      None, Cos2,
       /// <summary>
       /// größten Nebenkeulen maximal unterdrückt
       /// </summary>
-      ftHamming,
+      Hamming,
       /// <summary>
       /// stärkere Unterdrückung der Nebenkeulen, Reduktion der Frequenzauflösung
       /// </summary>
-      ftHanning,
-      ftBlackman,
+      Hanning,
+      Blackman,
       /// <summary>
       /// bessere Unterdrückung der Nebenkeulen
       /// </summary>
-      ftBlackmanHarris,
+      BlackmanHarris,
       /// <summary>
       /// besste Unterdrückung der Nebenkeulen
       /// </summary>
-      ftBlackmanNuttall
+      BlackmanNuttall
     }
     public uint dieLänge { get; private set; }
     public FensterTyp derTyp { get; private set; }
@@ -64,7 +64,7 @@ namespace ASHilfen
       double p6Dl1 = p4Dl1 + p2Dl1; // 6 Pi / ...
       switch (derTyp)
       {
-        case FensterTyp.ftCos2:
+        case FensterTyp.Cos2:
           /* 
            * p1Dl1*i         von 0 über pi/2 bis pi
            * cos(p1Dl1*i)    von 1 über 0    bis -1
@@ -74,14 +74,14 @@ namespace ASHilfen
           c = Math.Cos(p1Dl1 * i);
           fw = 1.0 - (c * c);
           break;
-        case FensterTyp.ftHamming:
+        case FensterTyp.Hamming:
           /* 0.54 - 0.46 * cos(n * 2pi/l-1)
            * p1Dl1*i      von 0 über pi bis 2 pi
            * cos(p1Dl1*i) von 1 über -1 bis 1
            */
           fw = 0.54 - (0.46 * Math.Cos(p2Dl1 * i));
           break;
-        case FensterTyp.ftHanning:
+        case FensterTyp.Hanning:
           /* oder von Hann-Fenster
            * 0.5 * [1.0 - cos(n * 2pi/l-1 )]
            * p1Dl1*i      von 0 über pi bis 2 pi
@@ -89,7 +89,7 @@ namespace ASHilfen
            */
           fw = 0.5 * (1.0 - Math.Cos(p2Dl1 * i));
           break;
-        case FensterTyp.ftBlackman:
+        case FensterTyp.Blackman:
           /* a0 - a1 * cos(n * 2pi/l-1) + a2 * cos(n * 4pi/l-1)
            * a0 = 0.5 * (1-alpha)
            * a1 = 0.5
@@ -104,7 +104,7 @@ namespace ASHilfen
               - (a1 * Math.Cos(p2Dl1 * i))
               + (a2 * Math.Cos(p4Dl1 * i));
           break;
-        case FensterTyp.ftBlackmanHarris:
+        case FensterTyp.BlackmanHarris:
           /* a0 - a1 * cos(n * 2pi/l-1) + a1 * cos(n * 4pi/l-1) - a3 * cos(n * 6pi/l-1)
           */
           a0 = 0.35875;
@@ -116,7 +116,7 @@ namespace ASHilfen
               + (a2 * Math.Cos(p4Dl1 * i))
               - (a3 * Math.Cos(p6Dl1 * i));
           break;
-        case FensterTyp.ftBlackmanNuttall:
+        case FensterTyp.BlackmanNuttall:
           /* a0 - a1 * cos(n * 2pi/l-1) + a2 * cos(n * 4pi/l-1) - a3 * cos(n * 6pi/l-1)
                   */
           a0 = 0.3635819;
@@ -128,7 +128,7 @@ namespace ASHilfen
               + (a2 * Math.Cos(p4Dl1 * i))
               - (a3 * Math.Cos(p6Dl1 * i));
           break;
-        case FensterTyp.ftNone:
+        case FensterTyp.None:
         default:
           fw = 1;
           break;

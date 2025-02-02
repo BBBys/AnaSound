@@ -12,26 +12,25 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>D:\Projekte\Audio\AnaSound\publish\AnaSound\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Web</InstallFrom>
-    <UpdateEnabled>true</UpdateEnabled>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
     <UpdateMode>Background</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>true</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>https://github.com/BBBys/AnaSound/publish/AnaSound/</InstallUrl>
     <SupportUrl>https://github.com/BBBys/AnaSound/blob/main/Readme.md</SupportUrl>
     <ProductName>AudioAnalyse</ProductName>
     <PublisherName>B.Borys</PublisherName>
     <SuiteName>Audio</SuiteName>
-    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>7</ApplicationRevision>
-    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationVersion>1.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -85,6 +84,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Methoden.cs" />
     <Compile Include="FASAKF.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +121,12 @@
     <Compile Include="FASPSD.Designer.cs">
       <DependentUpon>FASPSD.cs</DependentUpon>
     </Compile>
+    <Compile Include="FASSpec.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FASSpec.Designer.cs">
+      <DependentUpon>FASSpec.cs</DependentUpon>
+    </Compile>
     <Compile Include="FASZeit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +159,9 @@
     <EmbeddedResource Include="FASPSD.resx">
       <DependentUpon>FASPSD.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FASSpec.resx">
+      <DependentUpon>FASSpec.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FASZeit.resx">
       <DependentUpon>FASZeit.cs</DependentUpon>
     </EmbeddedResource>
@@ -167,6 +176,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="AnaSound_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
@@ -207,6 +217,12 @@
       <Project>{afd13a90-0803-400f-a81f-c191c825e0b5}</Project>
       <Name>ASHilfen</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Segrm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

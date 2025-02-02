@@ -12,6 +12,7 @@ namespace ASHilfen
     /// 343,2 m/s (1236 km/h) in trockener Luft von 20 °C [Wikipedia]
     /// </summary>
     public readonly double Schallgewindigkeit = 343.2;
+
     public WaveFileWriter AudioWriter { get; private set; }
     public WaveFileReader AudioReader { get; private set; }
     public string DateimitPfad { get; private set; }
@@ -27,9 +28,11 @@ namespace ASHilfen
     public uint BitProSample { get; private set; }
     public uint Chan { get; private set; }
     /// <summary>
-    /// Anzahl Samples in Datei
+    /// Anzahl Samples in Datei (1 Sample = 2 Werte bei Stereo)
     /// </summary>
     public ulong NSpl { get; private set; }
+    private uint ByteProSpl;
+    public ulong Pos => (ulong)AudioReader.Position / ByteProSpl;
     /// <summary>
     /// Dateiname ohne Pfad
     /// </summary>
@@ -38,6 +41,9 @@ namespace ASHilfen
     ///  Dauer in s
     /// </summary>
     public float Dauer { get; private set; }
+    /// <summary>
+    /// Dateilänge in Bytes
+    /// </summary>
     public ulong Len { get; private set; }
     public bool Mono => Chan == 1;
     public float SigMin { get; private set; }
@@ -49,7 +55,6 @@ namespace ASHilfen
     public float SigMaxR { get; private set; }
     public double MittelL { get; private set; }
     public double MittelR { get; private set; }
-    public bool Ende => AudioReader.Position >= AudioReader.Length;
     public WaveFormat WFmt => Richtung == asdRichtung.asdLesen
           ? AudioReader.WaveFormat
           : Richtung == asdRichtung.asdSchreiben ? AudioWriter.WaveFormat : null;
@@ -98,6 +103,7 @@ namespace ASHilfen
       AudioWriter = new WaveFileWriter(DateimitPfad, WFmtObj);
 
     }
+    public bool Ende() { return AudioReader.Position >= AudioReader.Length; }
 
     private void Analyse()
     {
@@ -152,7 +158,6 @@ namespace ASHilfen
     {
       bool encoding = false;
       AudioReader = new WaveFileReader(DateimitPfad);
-      uint dByte;
       Encoding = "nicht ermittelt";
       switch (AudioReader.WaveFormat.Encoding)
       {
@@ -489,9 +494,9 @@ namespace ASHilfen
       Len = (ulong)AudioReader.Length;
       SRate = (ulong)AudioReader.WaveFormat.SampleRate;
       BitProSample = (uint)AudioReader.WaveFormat.BitsPerSample;
-      dByte = BitProSample / 8;//Byte pro Sample
+      ByteProSpl = BitProSample / 8;//Byte pro Sample
       Chan = (uint)AudioReader.WaveFormat.Channels;
-      Dauer = Len / (float)SRate / Chan / dByte; //Sekunden
+      Dauer = Len / (float)SRate / Chan / ByteProSpl; //Sekunden
       DauerGanzeMin = (uint)Dauer / 60;
       DauerRestSek = Dauer - (60 * DauerGanzeMin);
     }
@@ -535,5 +540,35 @@ namespace ASHilfen
     {
       return AudioReader.ReadNextSampleFrame();
     }
+    /// <summary>
+    /// Ein Abschnitt der Audiodatei einlesen
+    /// in signal ab start bis ende-1 speicher
+    /// </summary>
+    /// <param name="signal">Ziel, das beschrieben wird</param>
+    /// <param name="ende">bis wohin geschrieben wird</param>
+    /// <param name="start">ab wo (default:Anfang) geschrieben wird</param>
+    /// <returns>true, wenn Ende erreicht</returns>
+    public bool AbschnittLesen(double[] signal, int ende, int start = 0)
+    {
+      double f;
+      float[] fc;
+      if (signal.Length < ende)
+      {
+        throw new ArgumentOutOfRangeException("signal", $"AbschnittLesen von {DateimitPfad}:\nZielfeld zu kurz");
+      }
+      for (int i = start; i < ende; i++)
+      {
+        if (this.Ende())
+          f = 0;
+        else
+        {
+          fc = this.ReadNext();
+          f = this.Mono ? fc[0] : ((fc[0] + fc[1]) * 0.5);
+        }
+        signal[i] = f;
+      }
+      return this.Ende();
+    }
+
   }
 }

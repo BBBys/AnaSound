@@ -3,11 +3,14 @@
   <PropertyGroup>
     <PublishUrlHistory>D:\Projekte\Audio\AnaSound\publish\AnaSound\|D:\Projekte\Audio\AnaSound\publish\|D:\publish\Audio\AnaSound\|D:\publish\|D:\Projekte\Audio\publish\AnaSound\</PublishUrlHistory>
     <InstallUrlHistory>https://github.com/BBBys/AnaSound/publish/AnaSound/|https://nas.fritz.box/Software/AnaSound/|https://nas.fritz.box/</InstallUrlHistory>
-    <SupportUrlHistory />
+    <SupportUrlHistory>https://github.com/BBBys/AnaSound/blob/main/Readme.md</SupportUrlHistory>
     <UpdateUrlHistory />
     <BootstrapperUrlHistory />
     <ErrorReportUrlHistory />
     <FallbackCulture>de-DE</FallbackCulture>
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
+  </PropertyGroup>
+  <PropertyGroup>
+    <EnableSecurityDebugging>false</EnableSecurityDebugging>
   </PropertyGroup>
 </Project>

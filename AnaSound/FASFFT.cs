@@ -33,14 +33,14 @@ namespace AnaSound
       int lFFT = 1 << exp;
       NAudio.Dsp.Complex[] data = new NAudio.Dsp.Complex[lFFT];
       double[] fenster =
-         new FensterFktn((uint)lFFT, FensterFktn.FensterTyp.ftBlackmanNuttall).Fenster();
-      //  double[] fenster = new FensterFktn((uint)lFFT, FensterFktn.FensterTyp.ftBlackman).Fenster();
+         new FensterFktn((uint)lFFT, FensterFktn.FensterTyp.BlackmanNuttall).Fenster();
+      //  double[] fenster = new FensterFktn((uint)lFFT, FensterFktn.FensterTyp.Blackman).Fenster();
       AudioDatei.Reset();
       Linie.Points.Clear();
       for (int i = 0; i < lFFT; i++)
       {
         float[] fc;
-        if (AudioDatei.Ende)
+        if (AudioDatei.Ende())
           f = 0;
         else
         {

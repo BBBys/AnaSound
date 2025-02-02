@@ -5,12 +5,12 @@ using OxyPlot.Series;
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using static System.Windows.Forms.LinkLabel;
 namespace AnaSound
 {
   public partial class FASZeit : Form
   {
-    private readonly LineSeries linieOben = new LineSeries { }, linieUnten = new LineSeries { };
+    //    private readonly LineSeries linieOben = new LineSeries { }, linieUnten = new LineSeries { };
+    private readonly AreaSeries Area = new AreaSeries();
     private readonly PlotModel myModel = null;
     private int Dbcnt = 0;
     //private float[,] Amplitude;
@@ -40,21 +40,21 @@ namespace AnaSound
       double intervall = splx / (double)AudioDatei.SRate;
       int i = 0;
       ;
-      while (!AudioDatei.Ende)//für jedes Sample
+      while (!AudioDatei.Ende())//für jedes Sample
       {
         float f;
         float[] fc;// = new float[2];
         splmax = splmin = 0;
         for (int j = 0; j < splx; j++)//so viel Samples
-          if (!AudioDatei.Ende)
+          if (!AudioDatei.Ende())
           {
             fc = AudioDatei.AudioReader.ReadNextSampleFrame();
             f = AudioDatei.Mono ? fc[0] : (fc[0] + fc[1]) * (float)0.5;
             splmax = Math.Max(splmax, f);
             splmin = Math.Min(splmin, f);
           }
-        linieOben.Points.Add(new DataPoint(i * intervall, splmax));
-        linieUnten.Points.Add(new DataPoint(i * intervall, splmin));
+        Area.Points.Add(new DataPoint(i * intervall, splmax));
+        Area.Points2.Add(new DataPoint(i * intervall, splmin));
         i++;
       }
       myModel.Axes.Add(new LinearAxis
@@ -79,8 +79,8 @@ namespace AnaSound
       Width = 1000;
       Height = 300;
       myModel.Series.Clear();
-      myModel.Series.Add(linieOben);
-      myModel.Series.Add(linieUnten);
+      myModel.Series.Add(Area);
+      //myModel.Series.Add(linieUnten);
       plotView1.Model = myModel;
       plotView1.Invalidate();
     }

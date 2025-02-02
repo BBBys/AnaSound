@@ -13,16 +13,17 @@ namespace AnaSound
     private readonly LineSeries Linie = new LineSeries();
     private readonly PlotModel myModel = null;
     private int FFTExp = 10;
-    private FensterFktn.FensterTyp FenTyp = FensterFktn.FensterTyp.ftBlackmanNuttall;
+    private FensterFktn.FensterTyp FenTyp = FensterFktn.FensterTyp.BlackmanNuttall;
     public FASPSD()
     {
       InitializeComponent();
+      myModel = new PlotModel();
     }
 
     public FASPSD(ASDatei audioDatei) : this()
     {
       AudioDatei = audioDatei;
-      myModel = new PlotModel();
+
 
     }
     private void ZeichnePSD()
@@ -32,6 +33,10 @@ namespace AnaSound
       int nSpectren, nach, von, lFFT, überlp;
       lFFT = 1 << FFTExp;
       überlp = 2 * lFFT / 3;
+      /// <summary> 
+      /// Signalabschnitt, über den gerechnet wird.
+      /// Diesmal kein Ringpuffer, sondern immer wieder nach vorne schieben
+      /// </summary>  
       double[] signal = new double[lFFT];
       NAudio.Dsp.Complex[] data = new NAudio.Dsp.Complex[lFFT];
       double[] betragspektrum = new double[lFFT];
@@ -44,17 +49,11 @@ namespace AnaSound
         betragspektrum[i] = 0;
       // erstes Einlesen der Daten
       AudioDatei.Reset();
-      AbschnittLesen(AudioDatei, signal, lFFT);
+      AudioDatei.AbschnittLesen(signal, lFFT);
       nSpectren = 0;
       do
       {
-        //ein Spektrum berechnen
-        for (int i = 0; i < lFFT; i++)
-        {
-          data[i].X = (float)(fenster[i] * signal[i]);
-          data[i].Y = 0;
-        }
-        NAudio.Dsp.FastFourierTransform.FFT(true, FFTExp, data);
+        Methoden.EinSpektrumBerechnen(signal, data, fenster, FFTExp);
         for (int i = 0; i < lFFT; i++)
         {
           betragspektrum[i] += Math.Sqrt((data[i].X * data[i].X) + (data[i].Y * data[i].Y));
@@ -71,8 +70,8 @@ namespace AnaSound
         }
         while (von < lFFT);
         //neue Daten einlesen
-        AbschnittLesen(AudioDatei, signal, lFFT, nach);
-      } while (!AudioDatei.Ende);
+        AudioDatei.AbschnittLesen(signal, lFFT, nach);
+      } while (!AudioDatei.Ende());
       HzProLinie = (double)AudioDatei.SRate / lFFT;
       Linie.Points.Clear();
       for (int i = 1; i < lFFT / 2; i++)//Gleichanteil (nach=0, 0 Hz) fehlt bei log-Darstellung
@@ -110,24 +109,6 @@ namespace AnaSound
       plotView1.Invalidate();
     }
 
-    private void AbschnittLesen(ASDatei datei, double[] signal, int lFFT, int start = 0)
-    {
-      double f;
-      float[] fc;
-      for (int i = start; i < lFFT; i++)
-      {
-        if (datei.Ende)
-          f = 0;
-        else
-        {
-          fc = datei.ReadNext();
-          f = datei.Mono ? fc[0] : ((fc[0] + fc[1]) * 0.5);
-        }
-        signal[i] = f;
-      }
-      return;
-    }
-
     private void FASPSD_Shown(object sender, EventArgs e)
     {
       Text = $"{AudioDatei.Name}, {AudioDatei.SRate / 1000} kHz ";
@@ -158,19 +139,19 @@ namespace AnaSound
 
     private void tsb001_Click(object sender, EventArgs e)
     {
-      FenTyp = FensterFktn.FensterTyp.ftHamming;
+      FenTyp = FensterFktn.FensterTyp.Hamming;
       ZeichnePSD();
     }
 
     private void tsb0001_Click(object sender, EventArgs e)
     {
-      FenTyp = FensterFktn.FensterTyp.ftBlackmanNuttall;
+      FenTyp = FensterFktn.FensterTyp.BlackmanNuttall;
       ZeichnePSD();
     }
 
     private void toolStripButton1_Click(object sender, EventArgs e)
     {
-      FenTyp = FensterFktn.FensterTyp.ftCos2;
+      FenTyp = FensterFktn.FensterTyp.Cos2;
       ZeichnePSD();
     }
   }

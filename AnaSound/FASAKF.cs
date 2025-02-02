@@ -3,7 +3,6 @@ using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 namespace AnaSound
@@ -37,12 +36,12 @@ namespace AnaSound
     public FASAKF()
     {
       InitializeComponent();
+      myModel = new PlotModel();
     }
 
     public FASAKF(ASDatei paudio) : this()
     {
       AudioDatei = paudio;
-      myModel = new PlotModel();
 
     }
     private void Berechne()
@@ -81,7 +80,7 @@ namespace AnaSound
       ///Puffer vorbelegen
       for (ulong i = 0; i < nRingPuffer; i++)//Signal einlesen
       {
-        if (AudioDatei.Ende)
+        if (AudioDatei.Ende())
           ringPuffer[i] = 0;
         else
         {
@@ -93,7 +92,7 @@ namespace AnaSound
        //Signal beginnt bei 0
       PufferZeiger = 0;
       //AKF Berechnen, jedes Lag ein Punkt
-      while (!AudioDatei.Ende)
+      while (!AudioDatei.Ende())
       {
         ///für jedes Lag
         for (ulong lag = 0; lag < nLagsAkf; lag++)
@@ -129,7 +128,7 @@ namespace AnaSound
         {
           //und jeweils einen Signalwert weiter, dazu:
           //den Wert vorne überschreiben
-          if (AudioDatei.Ende)
+          if (AudioDatei.Ende())
             ringPuffer[PufferZeiger] = 0;
           else
           {

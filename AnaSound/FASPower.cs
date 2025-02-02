@@ -90,14 +90,14 @@ namespace AnaSound
       Linie.Points.Clear();
       double p = 0;
       NrSampleAusDatei = 0;
-      while (!AudioDatei.Ende)//für ganze Datei
+      while (!AudioDatei.Ende())//für ganze Datei
       {
         float f;
         float[] fc;// = new float[2];
         /// ein Intervall
         for (int NrSampleImIntervall = 0; NrSampleImIntervall < nSplIntervall; NrSampleImIntervall++)//so viel Samples zusammenfassen im Intervall
         {
-          if (!AudioDatei.Ende)
+          if (!AudioDatei.Ende())
           {
             fc = AudioDatei.AudioReader.ReadNextSampleFrame();
             f = AudioDatei.Mono ? fc[0] : (float)((fc[0] + fc[1]) * 0.5);

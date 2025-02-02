@@ -1,4 +1,5 @@
 ﻿using ASHilfen;
+using NAudio.Dsp;
 using NAudio.Wave;
 using System;
 using System.Diagnostics;
@@ -19,6 +20,7 @@ namespace AnaSound
     private FASAKF FAKF = null;
     private FASFFT FFFT = null;
     private FASPSD FPSD = null;
+    private FASSpec FSpec = null;
     private WaveOutEvent AudioAusgabe = null;
     public FASMain()
     {
@@ -134,7 +136,7 @@ namespace AnaSound
       WaveFileWriter wfw = new WaveFileWriter(Path.Combine(AudioDatei.Pfad, "aus.wav"), wfmt);
       AudioDatei.Reset();
       double apl = 1;
-      while (!AudioDatei.Ende)
+      while (!AudioDatei.Ende())
       {
         float[] fc;
         double f;
@@ -210,7 +212,7 @@ namespace AnaSound
         wfw.WriteSample((float)f0);
       }
       p0 = 0;
-      while (!AudioDatei.Ende)
+      while (!AudioDatei.Ende())
       {
         //die werte im Puffer wurden schon ausgegeben
         //anfangen mit dem nächsten
@@ -275,5 +277,38 @@ namespace AnaSound
 
     private void testToolStripMenuItem_Click_1(object sender, EventArgs e)
     { }
+
+    private void specgramToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      FSpec?.Dispose();
+      FSpec = new FASSpec(AudioDatei);
+      FSpec.Show();
+    }
+    /// <summary>
+    /// Ein Spektrum berechnen
+    /// </summary>
+    /// <param name="signal"></param>
+    /// <param name="spektrum"></param>
+    /// <param name="fenster"></param>
+    /// <param name="exponent"></param>
+    public void EinSpektrumBerechnen(
+      double[] signal,
+      Complex[] spektrum,
+      double[] fenster,
+      int exponent)
+    {
+      int länge = 1 << exponent;
+      if (spektrum.Length < länge || fenster.Length < spektrum.Length)
+      {
+        throw new ArgumentOutOfRangeException("Feld Spektrum oder Fenster zu kurz");
+      }
+      //ein Spektrum berechnen
+      for (int i = 0; i < länge; i++)
+      {
+        spektrum[i].X = (i < signal.Length) ? (float)(fenster[i] * signal[i]) : 0;
+        spektrum[i].Y = 0;
+      }
+      NAudio.Dsp.FastFourierTransform.FFT(true, exponent, spektrum);
+    }
   }
 }
