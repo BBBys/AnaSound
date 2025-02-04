@@ -32,7 +32,7 @@ namespace ASHilfen
       /// </summary>
       BlackmanNuttall
     }
-    public uint dieLänge { get; private set; }
+    public ulong dieLänge { get; private set; }
     public FensterTyp derTyp { get; private set; }
 
     private double[] dasFenster;
@@ -47,15 +47,33 @@ namespace ASHilfen
       {
         dasFenster[i] = FensterWert(i);
       }
-
       return dasFenster;
     }
+    public double[] FensterEin()
+    {
+      dasFenster = new double[dieLänge];
+      for (uint i = 0; i < dasFenster.Length; i++)
+      {
+        dasFenster[i] = FensterWert(i * 0.5);
+      }
+      return dasFenster;
+    }
+    public double[] FensterAus()
+    {
+      dasFenster = new double[dieLänge];
+      for (uint i = 0; i < dasFenster.Length; i++)
+      {
+        dasFenster[i] = FensterWert((dasFenster.Length - i - 1) * 0.5);
+      }
+      return dasFenster;
+    }
+
     /// <summary>
     /// gibt für das voreingestellte Fenster den Wert an der Position i zurück
     /// </summary>
     /// <param name="i"></param>
     /// <returns></returns>
-    public double FensterWert(uint i)
+    public double FensterWert(double i)
     {
       double a0, a1, a2, a3, c, fw;
       double p1Dl1 = Math.PI / (dieLänge - 1);
@@ -142,7 +160,7 @@ namespace ASHilfen
     /// </summary>
     /// <param name="n">Länge, max 4,3 Milliarden</param>
     /// <param name="t"></param>
-    public FensterFktn(uint n, FensterTyp t)
+    public FensterFktn(ulong n, FensterTyp t)
     {
       derTyp = t;
       dieLänge = n;
@@ -151,6 +169,5 @@ namespace ASHilfen
     {
       dasFenster = null;
     }
-
   }
 }

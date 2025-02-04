@@ -3,6 +3,7 @@ using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 namespace AnaSound
@@ -27,27 +28,23 @@ namespace AnaSound
     private float[] AKFTeil = null;
     // private float[] AKFZeit = null;
     private float akfWert;
-
     /// <summary>
     /// Dauer der AKF-Funktion
     /// </summary>
     private double DauerIntervall = 0;
-
     public FASAKF()
     {
       InitializeComponent();
       myModel = new PlotModel();
     }
-
     public FASAKF(ASDatei paudio) : this()
     {
       AudioDatei = paudio;
-
     }
-    private void Berechne()
-    {
-      Berechne(DauerIntervall);
-    }
+    //private void Berechne()
+    //{
+    //  Berechne(DauerIntervall);
+    //}
 
     /// <summary>
     /// Abschnittsweise Berechnung der AKF
@@ -56,43 +53,30 @@ namespace AnaSound
     /// 
     private void Berechne(double pDauer)
     {
-      float[] fc;
       if (pDauer < .0001)
         return;
       if (AudioDatei == null)
         return;
-      uint nPunktePlot;
       ulong nRingPuffer, PufferZeiger;
       float nAKFsBerechnet;
       DauerIntervall = pDauer;
-      //Zeichenpunkte auf Linie
-      nPunktePlot = (uint)(plotView1.Width * 0.9);
       nLagsAkf = (uint)Math.Ceiling(AudioDatei.SRate * DauerIntervall);
       nRingPuffer = 2 * nLagsAkf;
-      ringPuffer = new float[nRingPuffer].Select(x => x = 0).ToArray();
+      ringPuffer = new float[nRingPuffer];
       AKFData = new float[nLagsAkf];
       AKFTeil = new float[nLagsAkf];
-      //AKFZeit =
-      //  Enumerable.Range(0, (int)nLagsAkf)
-      //  .Select(x => (float)(x / (double)AudioDatei.SRate)).ToArray();
       AudioDatei.Reset();
       nAKFsBerechnet = 0;
       ///Puffer vorbelegen
       for (ulong i = 0; i < nRingPuffer; i++)//Signal einlesen
-      {
-        if (AudioDatei.Ende())
-          ringPuffer[i] = 0;
-        else
-        {
-          fc = AudioDatei.AudioReader.ReadNextSampleFrame();
-          ringPuffer[i] = AudioDatei.Mono ? fc[0] : (float)((fc[0] + fc[1]) * 0.5);
-        }
-      }//for Ringpuffer vorbelegen
-       //Puffer ist voll
-       //Signal beginnt bei 0
+        ringPuffer[i] = AudioDatei.ReadNextMono();
+      Debug.WriteLine(ringPuffer.Sum() / nRingPuffer);
+      //for Ringpuffer vorbelegen
+      //Puffer ist voll
+      //Signal beginnt bei 0
       PufferZeiger = 0;
       //AKF Berechnen, jedes Lag ein Punkt
-      while (!AudioDatei.Ende())
+      do
       {
         ///für jedes Lag
         for (ulong lag = 0; lag < nLagsAkf; lag++)
@@ -118,65 +102,56 @@ namespace AnaSound
               ringPuffer[(lag + SignalPunkt + PufferZeiger) % nRingPuffer];
           }
           AKFTeil[lag] = akfWert;
-        }//for alle AKF-Punkte berechnen
+        }//for über lag alle AKF-Punkte berechnen
         ///berechnete AKF speichern
-        for (ulong lag = 0; lag < nLagsAkf; lag++)
-          AKFData[lag] += AKFTeil[lag];
+        //for (ulong lag = 0; lag < nLagsAkf; lag++)
+        //  AKFData[lag] += AKFTeil[lag];
+        AKFData = AKFData.Zip(AKFTeil, (a, b) => a + b).ToArray();
         nAKFsBerechnet++;
-
         for (ulong nWeiter = 0; nWeiter < nLagsAkf; nWeiter++)
         {
           //und jeweils einen Signalwert weiter, dazu:
           //den Wert vorne überschreiben
-          if (AudioDatei.Ende())
-            ringPuffer[PufferZeiger] = 0;
-          else
-          {
-            fc = AudioDatei.AudioReader.ReadNextSampleFrame();
-            ringPuffer[PufferZeiger] = AudioDatei.Mono ? fc[0] : (float)((fc[0] + fc[1]) * 0.5);
-          }
+          ringPuffer[PufferZeiger] = AudioDatei.ReadNextMono();
           //dann den Anfangspunkt eins weiter und
           //der neue Wert wird der Letzte in der Kette
           PufferZeiger = (PufferZeiger + 1) % nRingPuffer;
         }
-      }//while !Ende
+      } while (!AudioDatei.Ende());
       Width = 1000;
       Height = 300;
       Text = $"AKF über {DauerIntervall} s ({nLagsAkf} Samples), Mittel aus {nAKFsBerechnet} Berechnungen";
-      for (ulong lag = 0; lag < nLagsAkf; lag++)
-        AKFData[lag] /= nAKFsBerechnet;
-
+      //for (ulong lag = 0; lag < nLagsAkf; lag++)
+      //  AKFData[lag] /= nAKFsBerechnet;
+      AKFData = AKFData.Select(x => x / nAKFsBerechnet).ToArray();
       Zeichne(AKFData, akfTyp);
     }
-
     private void Zeichne(float[] daten, AKFTyp at)
     {
-      double faktor = 1;
       Linie.Points.Clear();
+      double faktor;
       switch (at)
       {
         case AKFTyp.amFrequenz:
-          faktor = (double)AudioDatei.SRate;
+          faktor = AudioDatei.SRate;
           break;
         case AKFTyp.amWeg:
-          faktor = AudioDatei.Schallgewindigkeit / (double)AudioDatei.SRate;
+          faktor = AudioDatei.Schallgewindigkeit / AudioDatei.SRate;
           break;
         case AKFTyp.amZeit:
-          faktor = 1.0 / (double)AudioDatei.SRate;
+          faktor = 1.0 / AudioDatei.SRate;
           break;
         case AKFTyp.amKein:
           faktor = 1;
           break;
         default:
-          faktor = 1;
-          break;
+          throw new ArgumentOutOfRangeException("AKF-Typ", at.ToString());
       }
       for (int lag = 0; lag < daten.Length; lag++)
         if (at == AKFTyp.amFrequenz)
         { if (lag > 0) Linie.Points.Add(new DataPoint(faktor / lag, daten[lag])); }
         else
         { Linie.Points.Add(new DataPoint(faktor * lag, daten[lag])); }
-
       myModel.Series.Clear();
       myModel.Series.Add(Linie);
       setAxes(at);
@@ -184,7 +159,6 @@ namespace AnaSound
       plotView1.Model.InvalidatePlot(true);
       //  plotView1.Invalidate();
     }
-
     private void setAxes(AKFTyp amt = AKFTyp.amKein)
     {
       myModel.Axes.Clear();
@@ -230,9 +204,9 @@ namespace AnaSound
       //  myModel.ResetAllAxes();
     }
 
-    private void FASAKF_Paint(object sender, PaintEventArgs e)
-    {
-    }
+    //private void FASAKF_Paint(object sender, PaintEventArgs e)
+    //{
+    //}
     private void tsb10_Click(object sender, EventArgs e)
     {
       Berechne(10);
@@ -258,9 +232,9 @@ namespace AnaSound
       Berechne(0.001);
     }
 
-    private void FASPower_ResizeEnd(object sender, EventArgs e)
-    {
-    }
+    //private void FASPower_ResizeEnd(object sender, EventArgs e)
+    //{
+    //}
 
     private void FASAKF_Shown(object sender, EventArgs e)
     { }

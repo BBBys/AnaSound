@@ -20,13 +20,13 @@ namespace Testsignal
     private ASDatei AudioDatei;
     private string WavDateiGewählt;
     private float Dauer;
-    private double SinFq, ModA, ModFq;
+    /// <summary>
+    /// Parameter aus Textbox
+    /// </summary>
+    private double Param1, Param2, Param3, Param4;
     private enum signalTyp
     {
-      stNull,
-      stSin, stSchweb,
-      stRausch,
-      stKonstant
+      stNull, stSin, stSchweb, stRausch, stKonstant, stKnall, stWobbel
     }
     private signalTyp derTyp = signalTyp.stNull;
     public FTSMain()
@@ -70,92 +70,249 @@ namespace Testsignal
       {
         case signalTyp.stNull:
           break;
+        case signalTyp.stWobbel:
+          tbTyp.Text = "Wobbel";
+          tbParam.Text = $"von {Param1} Hz";
+          tbParam2.Text = $"bis {Param2} Hz";
+          tbParam3.Text = $"{Param3} Durchläufe";
+          tbParam4.Text = $"Amplitude {Param4} %";
+          break;
         case signalTyp.stSin:
           tbTyp.Text = "Sinus";
-          tbParam.Text = $"Sinus {SinFq} Hz";
+          tbParam.Text = $"    Sinus {Param1} Hz";
+          tbParam2.Text = $" 2. Sinus {Param2} Hz";
+          tbParam3.Text = $" 3. Sinus {Param3} Hz";
+          tbParam4.Text = $"Amplitude {Param4} %";
           break;
         case signalTyp.stSchweb:
           tbTyp.Text = "Schwebung";
-          tbParam.Text = $"Basis {SinFq} Hz";
-          tbParam2.Text = $"Mod {ModFq} Hz";
-          tbParam3.Text = $"Ampl {ModA}";
+          tbParam.Text = $"Mod Hz";
+          tbParam2.Text = $"Mod Hz";
+          tbParam3.Text = $"Ampl ";
           break;
         case signalTyp.stKonstant:
           tbTyp.Text = "konstant";
           tbParam.Text = $"";
           tbParam2.Text = $"";
-          tbParam3.Text = $"Wert {ModA}";
+          tbParam3.Text = $"Wert ";
           break;
         case signalTyp.stRausch:
           tbTyp.Text = "Rauschen";
           tbParam.Text = "";
           tbParam2.Text = "";
           tbParam3.Text = "";
+          tbParam4.Text = $"Amplitude {Param4} %";
+          break;
+        case signalTyp.stKnall:
+          tbTyp.Text = "Knall";
+          tbParam.Text = "";
+          tbParam2.Text = "";
+          tbParam3.Text = "";
+          tbParam4.Text = "";
           break;
         default:
-          break;
+          throw new ArgumentOutOfRangeException("SetHMI, Case {derTyp} fehlt");
       }
     }
     private void bErzeuge_Click(object sender, EventArgs e)
     {
+      ulong nSignal, nEin, nAus;
+      double[] fEin, fAus;
       AudioDatei?.Dispose();
       AudioDatei = new ASDatei(WavDateiGewählt, SampleRate, Kanäle);
-      double spl, fq1, fq2, pirate;
-      pirate = Math.PI / SampleRate;
-      uint anzahl = (uint)Math.Floor(Dauer * SampleRate);
+      double sample, fq1, fq2, pirate, einausDauer;
+      pirate = 2.0 * Math.PI / SampleRate;
+      einausDauer = (derTyp == signalTyp.stRausch) ? 0.3 : 0.01;
+      nSignal = (uint)Math.Ceiling(Dauer * SampleRate);
+      nEin = nAus = (uint)Math.Floor(einausDauer * SampleRate);
+      fEin = new FensterFktn(nEin, FensterFktn.FensterTyp.Cos2).FensterEin();
+      fAus = new FensterFktn(nAus, FensterFktn.FensterTyp.Cos2).FensterAus();
       switch (derTyp)
       {
         case signalTyp.stNull:
           return;
+        case signalTyp.stWobbel:
+          ErzeugeWobbel(Param1, Param2, Dauer, Param4, (int)Math.Round(Param3), AudioDatei);
+          break;
         case signalTyp.stSin:
-          fq1 = SinFq;
-          fq2 = 3 * fq1 / 2;
-          for (ulong i = 0; i < anzahl; i++)
-          {
-            double mult = i * pirate;
-            spl = .2 * (Math.Cos(fq1 * mult) + Math.Cos(fq2 * mult));
-            AudioDatei.WriteSample((float)spl);
-          }
+          ErzeugeSin(nSignal, pirate, fEin, fAus, Param4, AudioDatei);
           break;
         case signalTyp.stRausch:
-          Random r = new Random();
-          for (ulong i = 0; i < anzahl; i++)
-          {
-            spl =
-              r.NextDouble() + r.NextDouble()
-              + r.NextDouble() + r.NextDouble() + r.NextDouble();
-            AudioDatei.WriteSample((float)((spl * 0.4) - 1.0));
-          }
+          ErzeugeRausch(nSignal, Param4, fEin, fAus, AudioDatei);
           break;
         case signalTyp.stKonstant:
-          for (ulong i = 0; i < anzahl; i++)
+          for (ulong i = 0; i < nSignal; i++)
           {
-            AudioDatei.WriteSample((float)ModA);
+            AudioDatei.WriteSample((float)Param4);
           }
           break;
+        case signalTyp.stKnall:
+          for (ulong i = 0; i < 10 * nEin; i++)
+            AudioDatei.WriteSample(0);
+          AudioDatei.WriteSample(1);
+          AudioDatei.WriteSample(1);
+          AudioDatei.WriteSample(1);
+          AudioDatei.WriteSample(1);
+          AudioDatei.WriteSample(1);
+          AudioDatei.WriteSample(1);
+          AudioDatei.WriteSample(-1);
+          AudioDatei.WriteSample(-1);
+          AudioDatei.WriteSample(-1);
+          AudioDatei.WriteSample(-1);
+          AudioDatei.WriteSample(-1);
+          AudioDatei.WriteSample(-1);
+          for (ulong i = 0; i < nSignal; i++)
+            AudioDatei.WriteSample(0);
+          break;
         case signalTyp.stSchweb:
-          fq1 = SinFq;
-          fq2 = ModFq;
-          for (ulong i = 0; i < anzahl; i++)
+          fq1 = Param1;
+          fq2 = Param2;
+          for (ulong i = 0; i < nSignal; i++)
           {
             double mult = i * pirate;
-            spl = .6 * Math.Cos((fq1 * mult) + (ModA * Math.Cos(fq2 * mult)));
-            AudioDatei.WriteSample((float)spl);
+            sample = .6 * Math.Cos((fq1 * mult) + (Param4 * Math.Cos(fq2 * mult)));
+            AudioDatei.WriteSample((float)sample);
           }
           break;
         default:
-          return;
+          throw new ArgumentOutOfRangeException("bErzeuge_Click, Case {derTyp} fehlt");
       }
       AudioDatei.Flush();
       AudioDatei.Dispose();
       AudioDatei = null;
     }
 
-    private void textBox1_Leave(object sender, EventArgs e)
+    private void ErzeugeSin(ulong nSaples,
+       double pirate,
+      double[] fEin,
+      double[] fAus,
+      double amplitude,
+       ASDatei asd)
     {
+      double sample;
+      ulong iSignal;
+      int nSin = 0;
+      if (Param1 > 0)
+        nSin++;
+      if (Param2 > 0)
+        nSin++;
+      if (Param3 > 0)
+        nSin++;
+      amplitude = 0.01 * amplitude / nSin;
+      iSignal = 0;
 
+      for (ulong i = 0; i < (ulong)fEin.Length; i++)
+      {
+        double mult = iSignal++ * pirate;
+        sample = fEin[i] * amplitude *
+          (Math.Cos(Param1 * mult) +
+          Math.Sin(Param2 * mult) +
+          Math.Sin(Param3 * mult));
+        asd.WriteSample((float)sample);
+      }
+      for (ulong i = 0; i < nSaples; i++)
+      {
+        double mult = iSignal++ * pirate;
+        sample = amplitude *
+          (Math.Cos(Param1 * mult) +
+          Math.Sin(Param2 * mult) +
+          Math.Sin(Param3 * mult));
+        asd.WriteSample((float)sample);
+      }
+      for (ulong i = 0; i < (ulong)fAus.Length; i++)
+      {
+        double mult = iSignal++ * pirate;
+        sample = fAus[i] * amplitude *
+          (Math.Cos(Param1 * mult) +
+          Math.Sin(Param2 * mult) +
+          Math.Sin(Param3 * mult));
+        asd.WriteSample((float)sample);
+      }
+      return;
     }
 
+    private void ErzeugeRausch(
+      ulong nSamples,
+      double amplitude,
+      double[] fEin,
+      double[] fAus, ASDatei asd)
+    {
+      double sample;
+      Random r = new Random();
+      amplitude *= 0.4 * 0.01;
+      for (ulong i = 0; i < (ulong)fEin.Length; i++)
+      {
+        sample = amplitude *
+          (r.NextDouble() +
+          r.NextDouble() +
+          r.NextDouble() +
+          r.NextDouble() +
+          r.NextDouble());
+        asd.WriteSample((float)(fEin[i] * (sample - 1.0)));
+      }
+      for (ulong i = 0; i < nSamples; i++)
+      {
+        sample = amplitude *
+          (r.NextDouble() +
+          r.NextDouble() +
+          r.NextDouble() +
+          r.NextDouble() +
+          r.NextDouble());
+        asd.WriteSample((float)(sample - 1.0));
+      }
+      for (ulong i = 0; i < (ulong)fAus.Length; i++)
+      {
+        sample = amplitude *
+          (r.NextDouble() +
+          r.NextDouble() +
+          r.NextDouble() +
+          r.NextDouble() +
+          r.NextDouble());
+        asd.WriteSample((float)(fAus[i] * (sample - 1.0)));
+      }
+
+      return;
+    }
+
+    private void ErzeugeWobbel(
+      double fAb,
+      double fBis,
+      double dauerGesamt,
+      double amplitude,
+      int mal, ASDatei asd)
+    {
+      double sample, phi;
+      phi = 0;
+      //soviel Werte für 1x hoch oder runter
+      ulong nSignal = (ulong)Math.Round(0.5 * dauerGesamt * SampleRate / mal);
+      //soviel dreht sich der Zeiger pro Wert bei f = fAb und bei f = fBis
+      double dPhiAb = 2.0 * Math.PI * fAb / SampleRate;
+      double dPhiBis = 2.0 * Math.PI * fBis / SampleRate;
+      //soviel muss die Drehung zunehmen
+      double dPhiHub = dPhiBis - dPhiAb;
+      //soviel nimmt die Drehung pro Wert zu
+      double dPhiInc = dPhiHub / nSignal;
+      double dPhi = dPhiAb;
+      amplitude *= 0.01;
+      for (int i = 0; i < mal; i++)
+      {
+        for (ulong j = 0; j < nSignal; j++)
+        {
+          sample = amplitude * Math.Sin(phi);
+          asd.WriteSample((float)sample);
+          phi += dPhi;
+          dPhi += dPhiInc;
+        }
+        for (ulong j = 0; j < nSignal; j++)
+        {
+          sample = amplitude * Math.Sin(phi);
+          asd.WriteSample((float)sample);
+          phi += dPhi;
+          dPhi -= dPhiInc;
+        }
+      }
+      return;
+    }
     private void textBox1_Click(object sender, EventArgs e)
     {
       TextBox tb = (TextBox)sender;
@@ -170,30 +327,16 @@ namespace Testsignal
       }
       SetHMI();
     }
-
-    private void rbMono_Click(object sender, EventArgs e)
-    {
-    }
-
     private void tbDauer_Leave(object sender, EventArgs e)
     {
       string[] s;
       TextBox tb = (TextBox)sender;
       if (tb.Text.Length < 1)
-      {
         return;
-      }
-
       s = tb.Text.Split(' ');
       Dauer = s.Length > 0 ? (float)Convert.ToDouble(s[0]) : 1;
       SetHMI();
     }
-    private void rbSchweb_Click(object sender, EventArgs e)
-    {
-
-    }
-
-
     private void rbSin_Click(object sender, EventArgs e)
     {
       RadioButton rb = (RadioButton)sender;
@@ -212,9 +355,14 @@ namespace Testsignal
         case "konstant":
           derTyp = signalTyp.stKonstant;
           break;
-        default:
-          derTyp = signalTyp.stNull;
+        case "Wobbel":
+          derTyp = signalTyp.stWobbel;
           break;
+        case "Knall":
+          derTyp = signalTyp.stKnall;
+          break;
+        default:
+          throw new ArgumentOutOfRangeException("rbSin_Click, Case {typ} fehlt");
       }
       SetHMI();
     }
@@ -232,52 +380,34 @@ namespace Testsignal
       TextBox tb = (TextBox)sender;
       tb.Text = "";
     }
-
-    private void tbParam_Leave(object sender, EventArgs e)
+    private void textBoxLeave(object sender, EventArgs e)
     {
       string[] s;
       TextBox tb = (TextBox)sender;
-      if (tb.Text.Length < 1)
-      {
-        return;
-      }
-
       s = tb.Text.Split(' ');
-      SinFq = s.Length > 0 ? (float)Convert.ToDouble(s[0]) : 440;
+      switch (tb.Name)
+      {
+        case "tbParam":
+          Param1 = s[0].Length > 0 ? Convert.ToDouble(s[0]) : 0;
+          break;
+        case "tbParam2":
+          Param2 = s[0].Length > 0 ? Convert.ToDouble(s[0]) : 0;
+          break;
+        case "tbParam3":
+          Param3 = s[0].Length > 0 ? Convert.ToDouble(s[0]) : 0;
+          break;
+        case "tbParam4":
+          Param4 = s[0].Length > 0 ? Convert.ToDouble(s[0]) : 0;
+          break;
+        default:
+          throw new ArgumentOutOfRangeException(
+            "textBoxLeave, Case {tb.Name} fehlt");
+      }
       SetHMI();
     }
-
-    private void textBox1_Leave_1(object sender, EventArgs e)
-    {
-      string[] s;
-      TextBox tb = (TextBox)sender;
-      if (tb.Text.Length < 1)
-      {
-        return;
-      }
-
-      s = tb.Text.Split(' ');
-      ModA = s.Length > 0 ? (float)Convert.ToDouble(s[0]) : 20;
-      SetHMI();
-    }
-
     private void button1_Click(object sender, EventArgs e)
     {
       Close();
-    }
-
-    private void tbParam2_Leave(object sender, EventArgs e)
-    {
-      string[] s;
-      TextBox tb = (TextBox)sender;
-      if (tb.Text.Length < 1)
-      {
-        return;
-      }
-
-      s = tb.Text.Split(' ');
-      ModFq = s.Length > 0 ? (float)Convert.ToDouble(s[0]) : 20;
-      SetHMI();
     }
 
     private void FTSMain_FormClosed(object sender, FormClosedEventArgs e)

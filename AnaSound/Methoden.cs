@@ -29,7 +29,7 @@ namespace AnaSound
         spektrum[i].X = (i < signal.Length) ? (float)(fenster[i] * signal[i]) : 0;
         spektrum[i].Y = 0;
       }
-      NAudio.Dsp.FastFourierTransform.FFT(true, exponent, spektrum);
+      FastFourierTransform.FFT(true, exponent, spektrum);
     }
   }
 }

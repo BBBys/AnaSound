@@ -49,7 +49,7 @@ namespace AnaSound
         betragspektrum[i] = 0;
       // erstes Einlesen der Daten
       AudioDatei.Reset();
-      AudioDatei.AbschnittLesen(signal, lFFT);
+      _ = AudioDatei.AbschnittLesen(signal, lFFT);
       nSpectren = 0;
       do
       {
@@ -70,7 +70,7 @@ namespace AnaSound
         }
         while (von < lFFT);
         //neue Daten einlesen
-        AudioDatei.AbschnittLesen(signal, lFFT, nach);
+        _ = AudioDatei.AbschnittLesen(signal, lFFT, nach);
       } while (!AudioDatei.Ende());
       HzProLinie = (double)AudioDatei.SRate / lFFT;
       Linie.Points.Clear();

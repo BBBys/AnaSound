@@ -95,13 +95,8 @@ namespace ASHilfen
       SRate = prate;
       Chan = pchan;
       Dauer = 0;//TODO
-      //--------------------------------------------------------
       WFmtObj = new WaveFormat((int)SRate, (int)Chan);
-
-
-      //--------------------------------------------------------
       AudioWriter = new WaveFileWriter(DateimitPfad, WFmtObj);
-
     }
     public bool Ende() { return AudioReader.Position >= AudioReader.Length; }
 
@@ -540,6 +535,19 @@ namespace ASHilfen
     {
       return AudioReader.ReadNextSampleFrame();
     }
+
+    /// <summary>
+    /// Ein Sample lesen, 0 wenn zuende, Stereo in Mono wandeln
+    /// </summary>
+    /// <returns>Sample oder 0</returns>
+    public float ReadNextMono()
+    {
+      if (Ende())
+        return 0;
+      float[] fc = ReadNext();
+      return Mono ? fc[0] : (float)((fc[0] + fc[1]) * 0.5);
+    }
+
     /// <summary>
     /// Ein Abschnitt der Audiodatei einlesen
     /// in signal ab start bis ende-1 speicher
@@ -558,16 +566,16 @@ namespace ASHilfen
       }
       for (int i = start; i < ende; i++)
       {
-        if (this.Ende())
+        if (Ende())
           f = 0;
         else
         {
-          fc = this.ReadNext();
-          f = this.Mono ? fc[0] : ((fc[0] + fc[1]) * 0.5);
+          fc = ReadNext();
+          f = Mono ? fc[0] : ((fc[0] + fc[1]) * 0.5);
         }
         signal[i] = f;
       }
-      return this.Ende();
+      return Ende();
     }
 
   }

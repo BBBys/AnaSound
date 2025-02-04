@@ -33,6 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.tbParam4 = new System.Windows.Forms.TextBox();
             this.tbParam3 = new System.Windows.Forms.TextBox();
             this.tbParam2 = new System.Windows.Forms.TextBox();
             this.lParam = new System.Windows.Forms.Label();
@@ -60,6 +61,7 @@
             this.sfd1 = new System.Windows.Forms.SaveFileDialog();
             this.bErzeuge = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -115,6 +117,7 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.tbParam4);
             this.groupBox7.Controls.Add(this.tbParam3);
             this.groupBox7.Controls.Add(this.tbParam2);
             this.groupBox7.Controls.Add(this.lParam);
@@ -127,6 +130,15 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Parameter";
             // 
+            // tbParam4
+            // 
+            this.tbParam4.Location = new System.Drawing.Point(6, 109);
+            this.tbParam4.Name = "tbParam4";
+            this.tbParam4.Size = new System.Drawing.Size(173, 22);
+            this.tbParam4.TabIndex = 4;
+            this.tbParam4.Enter += new System.EventHandler(this.tbParam_Enter);
+            this.tbParam4.Leave += new System.EventHandler(this.textBoxLeave);
+            // 
             // tbParam3
             // 
             this.tbParam3.Location = new System.Drawing.Point(6, 86);
@@ -134,7 +146,7 @@
             this.tbParam3.Size = new System.Drawing.Size(173, 22);
             this.tbParam3.TabIndex = 3;
             this.tbParam3.Enter += new System.EventHandler(this.tbParam_Enter);
-            this.tbParam3.Leave += new System.EventHandler(this.textBox1_Leave_1);
+            this.tbParam3.Leave += new System.EventHandler(this.textBoxLeave);
             // 
             // tbParam2
             // 
@@ -143,7 +155,7 @@
             this.tbParam2.Size = new System.Drawing.Size(173, 22);
             this.tbParam2.TabIndex = 2;
             this.tbParam2.Enter += new System.EventHandler(this.tbParam_Enter);
-            this.tbParam2.Leave += new System.EventHandler(this.tbParam2_Leave);
+            this.tbParam2.Leave += new System.EventHandler(this.textBoxLeave);
             // 
             // lParam
             // 
@@ -161,10 +173,11 @@
             this.tbParam.Size = new System.Drawing.Size(173, 22);
             this.tbParam.TabIndex = 0;
             this.tbParam.Enter += new System.EventHandler(this.tbParam_Enter);
-            this.tbParam.Leave += new System.EventHandler(this.tbParam_Leave);
+            this.tbParam.Leave += new System.EventHandler(this.textBoxLeave);
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.radioButton1);
             this.groupBox6.Controls.Add(this.tbTyp);
             this.groupBox6.Controls.Add(this.radioButton3);
             this.groupBox6.Controls.Add(this.rbKonstant);
@@ -186,7 +199,7 @@
             this.tbTyp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbTyp.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbTyp.ForeColor = System.Drawing.Color.Black;
-            this.tbTyp.Location = new System.Drawing.Point(23, 132);
+            this.tbTyp.Location = new System.Drawing.Point(6, 156);
             this.tbTyp.Name = "tbTyp";
             this.tbTyp.Size = new System.Drawing.Size(19, 19);
             this.tbTyp.TabIndex = 7;
@@ -195,13 +208,14 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(6, 109);
+            this.radioButton3.Location = new System.Drawing.Point(6, 132);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(37, 21);
+            this.radioButton3.Size = new System.Drawing.Size(60, 21);
             this.radioButton3.TabIndex = 4;
             this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "  ";
+            this.radioButton3.Text = "Knall";
             this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.Click += new System.EventHandler(this.rbSin_Click);
             // 
             // rbKonstant
             // 
@@ -437,6 +451,18 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(6, 110);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(77, 21);
+            this.radioButton1.TabIndex = 8;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Wobbel";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.Click += new System.EventHandler(this.rbSin_Click);
+            // 
             // FTSMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -500,6 +526,8 @@
     private System.Windows.Forms.TextBox tbParam2;
     private System.Windows.Forms.TextBox tbParam3;
     private System.Windows.Forms.Button button1;
+    private System.Windows.Forms.TextBox tbParam4;
+    private System.Windows.Forms.RadioButton radioButton1;
   }
 }
 

@@ -30,6 +30,7 @@
 *.exe
 *.out
 *.app
+*.vs
 /.vs
 /AnaSound/.vs
 /AnaSound/bin
@@ -44,5 +45,6 @@
 /BilderVorlagen
 /ASHilfen/bin
 /publish
-/publish
 /ASHilfen/bin
+AnaSound/applications-other.ico
+Testsignal/audio-volume-high-2.ico

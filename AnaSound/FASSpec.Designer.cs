@@ -34,14 +34,22 @@
             this.tsb10 = new System.Windows.Forms.ToolStripButton();
             this.tsb1 = new System.Windows.Forms.ToolStripButton();
             this.tsb01 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.tsb001 = new System.Windows.Forms.ToolStripButton();
             this.tsb0001 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tslFFT = new System.Windows.Forms.ToolStripStatusLabel();
@@ -49,9 +57,6 @@
             this.tslFq = new System.Windows.Forms.ToolStripStatusLabel();
             this.tslGemittelt = new System.Windows.Forms.ToolStripStatusLabel();
             this.tslLap = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -63,7 +68,7 @@
             this.plotView1.Location = new System.Drawing.Point(0, 0);
             this.plotView1.Name = "plotView1";
             this.plotView1.PanCursor = System.Windows.Forms.Cursors.Hand;
-            this.plotView1.Size = new System.Drawing.Size(919, 450);
+            this.plotView1.Size = new System.Drawing.Size(1032, 450);
             this.plotView1.TabIndex = 0;
             this.plotView1.Text = "plotView1";
             this.plotView1.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
@@ -77,21 +82,26 @@
             this.tsb10,
             this.tsb1,
             this.tsb01,
+            this.toolStripSeparator6,
             this.tsb001,
             this.tsb0001,
             this.toolStripButton1,
+            this.toolStripSeparator4,
             this.toolStripButton4,
             this.toolStripButton3,
+            this.toolStripSeparator3,
             this.toolStripButton5,
             this.toolStripButton7,
             this.toolStripButton6,
-            this.toolStripButton2,
+            this.toolStripSeparator2,
             this.toolStripButton8,
             this.toolStripButton9,
-            this.toolStripButton10});
+            this.toolStripButton10,
+            this.toolStripSeparator1,
+            this.toolStripButton2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(919, 32);
+            this.toolStrip1.Size = new System.Drawing.Size(1032, 32);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -125,6 +135,11 @@
             this.tsb01.Size = new System.Drawing.Size(56, 29);
             this.tsb01.Text = "4096";
             this.tsb01.Click += new System.EventHandler(this.tsb10_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 32);
             // 
             // tsb001
             // 
@@ -162,6 +177,11 @@
             this.toolStripButton1.ToolTipText = "größten Nebenkeulen maximal unterdrückt";
             this.toolStripButton1.Click += new System.EventHandler(this.tsb10_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 32);
+            // 
             // toolStripButton4
             // 
             this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -181,6 +201,11 @@
             this.toolStripButton3.Size = new System.Drawing.Size(56, 29);
             this.toolStripButton3.Text = "Max.";
             this.toolStripButton3.Click += new System.EventHandler(this.tsb10_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 32);
             // 
             // toolStripButton5
             // 
@@ -212,6 +237,46 @@
             this.toolStripButton6.Text = "9x";
             this.toolStripButton6.Click += new System.EventHandler(this.tsb10_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 32);
+            // 
+            // toolStripButton8
+            // 
+            this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton8.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton8.Image")));
+            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton8.Name = "toolStripButton8";
+            this.toolStripButton8.Size = new System.Drawing.Size(43, 29);
+            this.toolStripButton8.Text = "1/6";
+            this.toolStripButton8.Click += new System.EventHandler(this.tsb10_Click);
+            // 
+            // toolStripButton9
+            // 
+            this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton9.Image")));
+            this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton9.Name = "toolStripButton9";
+            this.toolStripButton9.Size = new System.Drawing.Size(43, 29);
+            this.toolStripButton9.Text = "1/3";
+            this.toolStripButton9.Click += new System.EventHandler(this.tsb10_Click);
+            // 
+            // toolStripButton10
+            // 
+            this.toolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton10.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton10.Image")));
+            this.toolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton10.Name = "toolStripButton10";
+            this.toolStripButton10.Size = new System.Drawing.Size(24, 29);
+            this.toolStripButton10.Text = "-";
+            this.toolStripButton10.Click += new System.EventHandler(this.tsb10_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 32);
+            // 
             // toolStripButton2
             // 
             this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -232,7 +297,7 @@
             this.tslLap});
             this.statusStrip1.Location = new System.Drawing.Point(0, 420);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(919, 30);
+            this.statusStrip1.Size = new System.Drawing.Size(1032, 30);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -271,41 +336,11 @@
             this.tslLap.Size = new System.Drawing.Size(20, 25);
             this.tslLap.Text = "_";
             // 
-            // toolStripButton8
-            // 
-            this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton8.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton8.Image")));
-            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton8.Name = "toolStripButton8";
-            this.toolStripButton8.Size = new System.Drawing.Size(43, 29);
-            this.toolStripButton8.Text = "1/6";
-            this.toolStripButton8.Click += new System.EventHandler(this.tsb10_Click);
-            // 
-            // toolStripButton9
-            // 
-            this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton9.Image")));
-            this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton9.Name = "toolStripButton9";
-            this.toolStripButton9.Size = new System.Drawing.Size(43, 29);
-            this.toolStripButton9.Text = "1/3";
-            this.toolStripButton9.Click += new System.EventHandler(this.tsb10_Click);
-            // 
-            // toolStripButton10
-            // 
-            this.toolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton10.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton10.Image")));
-            this.toolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton10.Name = "toolStripButton10";
-            this.toolStripButton10.Size = new System.Drawing.Size(24, 29);
-            this.toolStripButton10.Text = "-";
-            this.toolStripButton10.Click += new System.EventHandler(this.tsb10_Click);
-            // 
             // FASSpec
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(919, 450);
+            this.ClientSize = new System.Drawing.Size(1032, 450);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.plotView1);
@@ -346,5 +381,10 @@
     private System.Windows.Forms.ToolStripButton toolStripButton8;
     private System.Windows.Forms.ToolStripButton toolStripButton9;
     private System.Windows.Forms.ToolStripButton toolStripButton10;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
   }
 }

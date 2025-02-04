@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
 [assembly: AssemblyTitle("Testsignal")]
-[assembly: AssemblyDescription("erzeuge ein Testsignal")]
+[assembly: AssemblyDescription("erzeuge Testsignale")]
 [assembly: AssemblyProduct("Sound")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Burkhard Borys Vellmar")]
@@ -30,6 +30,6 @@ using System.Runtime.InteropServices;
 //      Buildnummer
 //      Revision
 //
-[assembly: AssemblyVersion("1.1.2.3")]
-[assembly: AssemblyFileVersion("1.1.2.3")]
+[assembly: AssemblyVersion("1.1.3.4")]
+[assembly: AssemblyFileVersion("1.1.3.4")]
 [assembly: NeutralResourcesLanguage("de-DE")]
