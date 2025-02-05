@@ -155,6 +155,18 @@ namespace Testsignal
           AudioDatei.WriteSample(1);
           AudioDatei.WriteSample(1);
           AudioDatei.WriteSample(1);
+          AudioDatei.WriteSample(1);
+          AudioDatei.WriteSample(1);
+          AudioDatei.WriteSample(1);
+          AudioDatei.WriteSample(1);
+          AudioDatei.WriteSample(1);
+          AudioDatei.WriteSample(1);
+          AudioDatei.WriteSample(-1);
+          AudioDatei.WriteSample(-1);
+          AudioDatei.WriteSample(-1);
+          AudioDatei.WriteSample(-1);
+          AudioDatei.WriteSample(-1);
+          AudioDatei.WriteSample(-1);
           AudioDatei.WriteSample(-1);
           AudioDatei.WriteSample(-1);
           AudioDatei.WriteSample(-1);
@@ -384,6 +396,8 @@ namespace Testsignal
     {
       string[] s;
       TextBox tb = (TextBox)sender;
+      if (tb.Text.Length < 1)
+        return;
       s = tb.Text.Split(' ');
       switch (tb.Name)
       {
@@ -399,7 +413,10 @@ namespace Testsignal
         case "tbParam4":
           Param4 = s[0].Length > 0 ? Convert.ToDouble(s[0]) : 0;
           break;
-        default:
+        case "tbDauer":
+          Dauer = s.Length > 0 ? (float)Convert.ToDouble(s[0]) : 1;
+             break;
+                default:
           throw new ArgumentOutOfRangeException(
             "textBoxLeave, Case {tb.Name} fehlt");
       }

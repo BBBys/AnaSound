@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("Burkhard Borys Vellmar")]
 [assembly: AssemblyCopyright("Copyright © Borys 2025")]
 
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("Bärenmarke")]
 [assembly: AssemblyCulture("")]
 
 // Durch Festlegen von ComVisible auf FALSE werden die Typen in dieser Assembly
@@ -30,6 +30,6 @@ using System.Runtime.InteropServices;
 //      Buildnummer
 //      Revision
 //
-[assembly: AssemblyVersion("1.1.3.4")]
-[assembly: AssemblyFileVersion("1.1.3.4")]
+[assembly: AssemblyVersion("1.2.1.13")]
+[assembly: AssemblyFileVersion("1.2.1.13")]
 [assembly: NeutralResourcesLanguage("de-DE")]

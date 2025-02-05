@@ -28,6 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FTSMain));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tbDatei = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,6 +40,7 @@
             this.lParam = new System.Windows.Forms.Label();
             this.tbParam = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.tbTyp = new System.Windows.Forms.Label();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.rbKonstant = new System.Windows.Forms.RadioButton();
@@ -61,7 +63,6 @@
             this.sfd1 = new System.Windows.Forms.SaveFileDialog();
             this.bErzeuge = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -78,7 +79,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(735, 47);
+            this.groupBox1.Size = new System.Drawing.Size(662, 47);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datei";
@@ -110,7 +111,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(0, 47);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(735, 263);
+            this.groupBox2.Size = new System.Drawing.Size(662, 217);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Signal";
@@ -123,9 +124,9 @@
             this.groupBox7.Controls.Add(this.lParam);
             this.groupBox7.Controls.Add(this.tbParam);
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox7.Location = new System.Drawing.Point(539, 18);
+            this.groupBox7.Location = new System.Drawing.Point(468, 18);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(191, 242);
+            this.groupBox7.Size = new System.Drawing.Size(191, 196);
             this.groupBox7.TabIndex = 5;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Parameter";
@@ -185,12 +186,24 @@
             this.groupBox6.Controls.Add(this.rbSchweb);
             this.groupBox6.Controls.Add(this.rbSin);
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox6.Location = new System.Drawing.Point(421, 18);
+            this.groupBox6.Location = new System.Drawing.Point(350, 18);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(118, 242);
+            this.groupBox6.Size = new System.Drawing.Size(118, 196);
             this.groupBox6.TabIndex = 4;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Typ";
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(6, 110);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(77, 21);
+            this.radioButton1.TabIndex = 8;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Wobbel";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.Click += new System.EventHandler(this.rbSin_Click);
             // 
             // tbTyp
             // 
@@ -271,19 +284,19 @@
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox5.Location = new System.Drawing.Point(230, 18);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(191, 242);
+            this.groupBox5.Size = new System.Drawing.Size(120, 196);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Dauer";
             // 
             // tbDauer
             // 
-            this.tbDauer.Location = new System.Drawing.Point(6, 38);
+            this.tbDauer.Location = new System.Drawing.Point(6, 19);
             this.tbDauer.Name = "tbDauer";
-            this.tbDauer.Size = new System.Drawing.Size(173, 22);
-            this.tbDauer.TabIndex = 0;
+            this.tbDauer.Size = new System.Drawing.Size(105, 22);
+            this.tbDauer.TabIndex = 1;
             this.tbDauer.Enter += new System.EventHandler(this.tbParam_Enter);
-            this.tbDauer.Leave += new System.EventHandler(this.tbDauer_Leave);
+            this.tbDauer.Leave += new System.EventHandler(this.textBoxLeave);
             // 
             // groupBox4
             // 
@@ -293,7 +306,7 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox4.Location = new System.Drawing.Point(120, 18);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(110, 242);
+            this.groupBox4.Size = new System.Drawing.Size(110, 196);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Kanäle";
@@ -305,7 +318,7 @@
             this.tbChan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbChan.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbChan.ForeColor = System.Drawing.Color.Black;
-            this.tbChan.Location = new System.Drawing.Point(23, 132);
+            this.tbChan.Location = new System.Drawing.Point(6, 156);
             this.tbChan.Name = "tbChan";
             this.tbChan.Size = new System.Drawing.Size(19, 19);
             this.tbChan.TabIndex = 6;
@@ -346,7 +359,7 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox3.Location = new System.Drawing.Point(3, 18);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(117, 242);
+            this.groupBox3.Size = new System.Drawing.Size(117, 196);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Samplerate";
@@ -358,7 +371,7 @@
             this.tbSR.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbSR.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbSR.ForeColor = System.Drawing.Color.Black;
-            this.tbSR.Location = new System.Drawing.Point(21, 132);
+            this.tbSR.Location = new System.Drawing.Point(6, 156);
             this.tbSR.Name = "tbSR";
             this.tbSR.Size = new System.Drawing.Size(19, 19);
             this.tbSR.TabIndex = 5;
@@ -432,7 +445,7 @@
             // bErzeuge
             // 
             this.bErzeuge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bErzeuge.Location = new System.Drawing.Point(455, 316);
+            this.bErzeuge.Location = new System.Drawing.Point(382, 270);
             this.bErzeuge.Name = "bErzeuge";
             this.bErzeuge.Size = new System.Drawing.Size(124, 27);
             this.bErzeuge.TabIndex = 2;
@@ -443,7 +456,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(585, 316);
+            this.button1.Location = new System.Drawing.Point(512, 270);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(145, 27);
             this.button1.TabIndex = 3;
@@ -451,29 +464,18 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(6, 110);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(77, 21);
-            this.radioButton1.TabIndex = 8;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Wobbel";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.Click += new System.EventHandler(this.rbSin_Click);
-            // 
             // FTSMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(735, 351);
+            this.ClientSize = new System.Drawing.Size(662, 305);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.bErzeuge);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FTSMain";
-            this.Text = "Form1";
+            this.Text = "Testsignal-Generator";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FTSMain_FormClosed);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -515,7 +517,6 @@
     private System.Windows.Forms.GroupBox groupBox4;
     private System.Windows.Forms.RadioButton rbStereo;
     private System.Windows.Forms.RadioButton rbMono;
-    private System.Windows.Forms.TextBox tbDauer;
     private System.Windows.Forms.GroupBox groupBox7;
     private System.Windows.Forms.Label lParam;
     private System.Windows.Forms.TextBox tbParam;
@@ -528,6 +529,7 @@
     private System.Windows.Forms.Button button1;
     private System.Windows.Forms.TextBox tbParam4;
     private System.Windows.Forms.RadioButton radioButton1;
+    private System.Windows.Forms.TextBox tbDauer;
   }
 }
 
