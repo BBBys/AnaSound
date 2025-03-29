@@ -24,13 +24,18 @@ namespace Testsignal
     /// Parameter aus Textbox
     /// </summary>
     private double Param1, Param2, Param3, Param4;
+    private string Param5;
     private enum signalTyp
     {
-      stNull, stSin, stSchweb, stRausch, stKonstant, stKnall, stWobbel
+      stNull, stSin, stSchweb, stRausch, stKonstant, stKnall, stWobbel,
+      st5Ton
     }
     private signalTyp derTyp = signalTyp.stNull;
     public FTSMain()
     {
+      /// <summary>
+      /// Auswahl Samplerate
+      /// </summary>
       RadioButton[] rbsSR = { rb11, rb22, rb44, rb48, rb8 };
       InitializeComponent();
       Assembly assembly = Assembly.GetExecutingAssembly();
@@ -75,6 +80,13 @@ namespace Testsignal
           tbParam.Text = $"von {Param1} Hz";
           tbParam2.Text = $"bis {Param2} Hz";
           tbParam3.Text = $"{Param3} Durchläufe";
+          tbParam4.Text = $"Amplitude {Param4} %";
+          break;
+        case signalTyp.st5Ton:
+          tbTyp.Text = "5-Ton-Ruf";
+          tbParam.Text = Param5;
+          tbParam2.Text = $" ";
+          tbParam3.Text = $" ";
           tbParam4.Text = $"Amplitude {Param4} %";
           break;
         case signalTyp.stSin:
@@ -136,6 +148,9 @@ namespace Testsignal
           break;
         case signalTyp.stSin:
           ErzeugeSin(nSignal, pirate, fEin, fAus, Param4, AudioDatei);
+          break;
+        case signalTyp.st5Ton:
+          Erzeuge5Ton(SampleRate, Param5, Param4, AudioDatei);
           break;
         case signalTyp.stRausch:
           ErzeugeRausch(nSignal, Param4, fEin, fAus, AudioDatei);
@@ -243,6 +258,44 @@ namespace Testsignal
       return;
     }
 
+    private void Erzeuge5Ton(ulong srate,
+                             string tonfolge,
+                             double amplitude,
+                             ASDatei asd)
+    {
+
+      double sample, pirate;
+      ulong pause600, dauer70;
+
+      _ = 0.01 * amplitude;
+      pirate = 2.0 * Math.PI / srate;
+      pause600 = 6 * srate / 10;  //600 ms
+      dauer70 = 7 * srate / 100;  //70 ms
+      char[] code = tonfolge.ToCharArray();
+      for (int i = 1; i < code.Length; i++)
+      {
+        if (code[i] == code[i - 1])
+          code[i] = 'R';
+      }
+      for (int j = 0; j < 2; j++)
+      {
+        for (ulong i = 0; i < pause600; i++)
+          asd.WriteSample(0);
+        foreach (char c in code)
+        {
+          double fq = Technisches.Fq5Ton[c];
+          for (ulong i = 0; i < dauer70; i++)
+          {
+            double mult = i * pirate;
+            sample = Math.Cos(fq * mult);
+            asd.WriteSample((float)sample);
+          }
+        }
+      }
+      for (ulong i = 0; i < pause600; i++)
+        asd.WriteSample(0);
+      return;
+    }
     private void ErzeugeRausch(
       ulong nSamples,
       double amplitude,
@@ -373,6 +426,9 @@ namespace Testsignal
         case "Knall":
           derTyp = signalTyp.stKnall;
           break;
+        case "5-Ton-Ruf":
+          derTyp = signalTyp.st5Ton;
+          break;
         default:
           throw new ArgumentOutOfRangeException("rbSin_Click, Case {typ} fehlt");
       }
@@ -392,6 +448,12 @@ namespace Testsignal
       TextBox tb = (TextBox)sender;
       tb.Text = "";
     }
+
+    private void rbT5_CheckedChanged(object sender, EventArgs e)
+    {
+
+    }
+
     private void textBoxLeave(object sender, EventArgs e)
     {
       string[] s;
@@ -402,7 +464,10 @@ namespace Testsignal
       switch (tb.Name)
       {
         case "tbParam":
-          Param1 = s[0].Length > 0 ? Convert.ToDouble(s[0]) : 0;
+          if (derTyp == signalTyp.st5Ton)
+            Param5 = s[0];
+          else
+            Param1 = s[0].Length > 0 ? Convert.ToDouble(s[0]) : 0;
           break;
         case "tbParam2":
           Param2 = s[0].Length > 0 ? Convert.ToDouble(s[0]) : 0;
@@ -415,8 +480,8 @@ namespace Testsignal
           break;
         case "tbDauer":
           Dauer = s.Length > 0 ? (float)Convert.ToDouble(s[0]) : 1;
-             break;
-                default:
+          break;
+        default:
           throw new ArgumentOutOfRangeException(
             "textBoxLeave, Case {tb.Name} fehlt");
       }
