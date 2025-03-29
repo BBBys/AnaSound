@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ASDatei.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="Technisches.cs" />
     <Compile Include="FensterFktn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
