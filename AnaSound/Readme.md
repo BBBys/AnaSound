@@ -1,12 +1,18 @@
 # Audio-Bearbeitung und -Analyse
 ## AnaSound
-Analyseprogramm: Informationen über Wave-Dateien
-Zeitbereich: Signal, Leistung, AKF.
-Frequenzbereich: FFT, Leistungsdichtespektrum, Spektrogramm. 
+Analyseprogramm
 
-## Testsignal
-Erzeugt unterschiedliche Signale
-
+enthält
+### allgemein
+* Informationen über Wave-Dateien
+### Zeitbereich
+* Signal
+* Leistung
+* AKF
+### Frequenzbereich
+* FFT
+* Leistungsdichtespektrum
+* Spektrogramm 
 # Weiteres
 verwendet
 * NAudio

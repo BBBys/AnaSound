@@ -48,3 +48,6 @@
 /ASHilfen/bin
 AnaSound/applications-other.ico
 Testsignal/audio-volume-high-2.ico
+*.ico
+/AnaSound/Testsignal/bin
+/AnaSound/Testsignal/obj

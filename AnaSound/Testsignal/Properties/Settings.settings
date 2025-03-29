@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Testsignal.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DatenDatei" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Signal.Wav</Value>
+    </Setting>
+    <Setting Name="DatenPfad" Type="System.String" Scope="User">
+      <Value Profile="(Default)">..</Value>
+    </Setting>
+    <Setting Name="SampleRate" Type="System.UInt64" Scope="User">
+      <Value Profile="(Default)">44100</Value>
+    </Setting>
+    <Setting Name="Kanäle" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="Dauer" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="Typ" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Sinus</Value>
+    </Setting>
+    <Setting Name="Parameter" Type="System.String" Scope="User">
+      <Value Profile="(Default)">440</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
