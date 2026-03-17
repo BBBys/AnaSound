@@ -39,7 +39,11 @@
             this.tsbWeg = new System.Windows.Forms.ToolStripButton();
             this.tsbFq = new System.Windows.Forms.ToolStripButton();
             this.plotView1 = new OxyPlot.WindowsForms.PlotView();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tslWarten = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tslOK = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -56,7 +60,7 @@
             this.tsbFq});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(782, 32);
+            this.toolStrip1.Size = new System.Drawing.Size(782, 27);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -66,7 +70,7 @@
             this.tsb10.Image = ((System.Drawing.Image)(resources.GetObject("tsb10.Image")));
             this.tsb10.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsb10.Name = "tsb10";
-            this.tsb10.Size = new System.Drawing.Size(49, 29);
+            this.tsb10.Size = new System.Drawing.Size(39, 24);
             this.tsb10.Text = "10 s";
             this.tsb10.Click += new System.EventHandler(this.tsb10_Click);
             // 
@@ -76,7 +80,7 @@
             this.tsb1.Image = ((System.Drawing.Image)(resources.GetObject("tsb1.Image")));
             this.tsb1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsb1.Name = "tsb1";
-            this.tsb1.Size = new System.Drawing.Size(39, 29);
+            this.tsb1.Size = new System.Drawing.Size(31, 24);
             this.tsb1.Text = "1 s";
             this.tsb1.Click += new System.EventHandler(this.tsb1_Click);
             // 
@@ -86,7 +90,7 @@
             this.tsb01.Image = ((System.Drawing.Image)(resources.GetObject("tsb01.Image")));
             this.tsb01.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsb01.Name = "tsb01";
-            this.tsb01.Size = new System.Drawing.Size(75, 29);
+            this.tsb01.Size = new System.Drawing.Size(60, 24);
             this.tsb01.Text = "100 ms";
             this.tsb01.Click += new System.EventHandler(this.tsb01_Click);
             // 
@@ -96,7 +100,7 @@
             this.tsb001.Image = ((System.Drawing.Image)(resources.GetObject("tsb001.Image")));
             this.tsb001.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsb001.Name = "tsb001";
-            this.tsb001.Size = new System.Drawing.Size(65, 29);
+            this.tsb001.Size = new System.Drawing.Size(52, 24);
             this.tsb001.Text = "10 ms";
             this.tsb001.Click += new System.EventHandler(this.tsb001_Click);
             // 
@@ -109,7 +113,7 @@
             this.tsb0001.Image = ((System.Drawing.Image)(resources.GetObject("tsb0001.Image")));
             this.tsb0001.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsb0001.Name = "tsb0001";
-            this.tsb0001.Size = new System.Drawing.Size(55, 29);
+            this.tsb0001.Size = new System.Drawing.Size(44, 24);
             this.tsb0001.Text = "1 ms";
             this.tsb0001.Click += new System.EventHandler(this.tsb0001_Click);
             // 
@@ -119,7 +123,7 @@
             this.tsbZeit.Image = ((System.Drawing.Image)(resources.GetObject("tsbZeit.Image")));
             this.tsbZeit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbZeit.Name = "tsbZeit";
-            this.tsbZeit.Size = new System.Drawing.Size(48, 29);
+            this.tsbZeit.Size = new System.Drawing.Size(39, 24);
             this.tsbZeit.Tag = "z";
             this.tsbZeit.Text = "Zeit";
             this.tsbZeit.Click += new System.EventHandler(this.tsbFq_Click);
@@ -130,7 +134,7 @@
             this.tsbWeg.Image = ((System.Drawing.Image)(resources.GetObject("tsbWeg.Image")));
             this.tsbWeg.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbWeg.Name = "tsbWeg";
-            this.tsbWeg.Size = new System.Drawing.Size(54, 29);
+            this.tsbWeg.Size = new System.Drawing.Size(43, 24);
             this.tsbWeg.Tag = "w";
             this.tsbWeg.Text = "Weg";
             this.tsbWeg.Click += new System.EventHandler(this.tsbFq_Click);
@@ -141,7 +145,7 @@
             this.tsbFq.Image = ((System.Drawing.Image)(resources.GetObject("tsbFq.Image")));
             this.tsbFq.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbFq.Name = "tsbFq";
-            this.tsbFq.Size = new System.Drawing.Size(94, 29);
+            this.tsbFq.Size = new System.Drawing.Size(73, 24);
             this.tsbFq.Tag = "fq";
             this.tsbFq.Text = "Frequenz";
             this.tsbFq.Click += new System.EventHandler(this.tsbFq_Click);
@@ -150,14 +154,43 @@
             // 
             this.plotView1.BackColor = System.Drawing.Color.White;
             this.plotView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotView1.Location = new System.Drawing.Point(0, 32);
+            this.plotView1.Location = new System.Drawing.Point(0, 27);
             this.plotView1.Name = "plotView1";
             this.plotView1.PanCursor = System.Windows.Forms.Cursors.Hand;
-            this.plotView1.Size = new System.Drawing.Size(782, 521);
+            this.plotView1.Size = new System.Drawing.Size(782, 504);
             this.plotView1.TabIndex = 1;
             this.plotView1.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
             this.plotView1.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
             this.plotView1.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tslWarten,
+            this.tslOK});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 531);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(782, 22);
+            this.statusStrip1.TabIndex = 2;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // tslWarten
+            // 
+            this.tslWarten.BackColor = System.Drawing.Color.Yellow;
+            this.tslWarten.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.tslWarten.Name = "tslWarten";
+            this.tslWarten.Size = new System.Drawing.Size(70, 20);
+            this.tslWarten.Text = "warten...";
+            this.tslWarten.Visible = false;
+            // 
+            // tslOK
+            // 
+            this.tslOK.BackColor = System.Drawing.Color.Lime;
+            this.tslOK.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.tslOK.Name = "tslOK";
+            this.tslOK.Size = new System.Drawing.Size(48, 20);
+            this.tslOK.Text = "fertig";
+            this.tslOK.Visible = false;
             // 
             // FASAKF
             // 
@@ -165,12 +198,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 553);
             this.Controls.Add(this.plotView1);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "FASAKF";
             this.Text = "AKF";
             this.Shown += new System.EventHandler(this.FASAKF_Shown);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,5 +224,8 @@
     private System.Windows.Forms.ToolStripButton tsbZeit;
     private System.Windows.Forms.ToolStripButton tsbWeg;
     private System.Windows.Forms.ToolStripButton tsbFq;
+    private System.Windows.Forms.StatusStrip statusStrip1;
+    private System.Windows.Forms.ToolStripStatusLabel tslWarten;
+    private System.Windows.Forms.ToolStripStatusLabel tslOK;
   }
 }

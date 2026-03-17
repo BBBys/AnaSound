@@ -48,17 +48,20 @@ namespace AnaSound
 
     /// <summary>
     /// Abschnittsweise Berechnung der AKF
+    /// komplett neue Berechnung, danach wird Zeichne(...) aufgerufen
     /// </summary>
     /// <param name="pDauer">Intervalldauer in s</param>
     /// 
     private void Berechne(double pDauer)
     {
-      if (pDauer < .0001)
+      tslOK.Visible = false;      if (pDauer < .0001)
         return;
       if (AudioDatei == null)
         return;
       ulong nRingPuffer, PufferZeiger;
       float nAKFsBerechnet;
+      tslWarten.Visible = true;statusStrip1.Refresh();
+
       DauerIntervall = pDauer;
       nLagsAkf = (uint)Math.Ceiling(AudioDatei.SRate * DauerIntervall);
       nRingPuffer = 2 * nLagsAkf;
@@ -124,11 +127,15 @@ namespace AnaSound
       //for (ulong lag = 0; lag < nLagsAkf; lag++)
       //  AKFData[lag] /= nAKFsBerechnet;
       AKFData = AKFData.Select(x => x / nAKFsBerechnet).ToArray();
+      tslWarten.Visible = false;
       Zeichne(AKFData, akfTyp);
+      tslOK.Visible = true;
     }
     private void Zeichne(float[] daten, AKFTyp at)
     {
       Linie.Points.Clear();
+      if (daten == null)
+        return;
       double faktor;
       switch (at)
       {
@@ -239,14 +246,7 @@ namespace AnaSound
     private void FASAKF_Shown(object sender, EventArgs e)
     { }
 
-    private void tsbWeg_Click(object sender, EventArgs e)
-    {
-    }
-
-    private void tsbZeit_Click(object sender, EventArgs e)
-    {
-    }
-
+   
     private void tsbFq_Click(object sender, EventArgs e)
     {
       ToolStripButton tsb = (ToolStripButton)sender;

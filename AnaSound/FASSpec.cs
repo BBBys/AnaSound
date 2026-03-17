@@ -10,9 +10,9 @@ namespace AnaSound
 {
   public partial class FASSpec : Form
   {
-    private bool kHz5 = false,Harmon=false; 
+    private bool kHz5 = false, Harmon = false;
     private int nMittel = 1;
-    private int FFTExp = 9; 
+    private int FFTExp = 9;
     private double ÜberlappAnteil = 5.0 / 6.0;
     private readonly ASDatei AudioDatei = null;
     private readonly PlotModel myModel = null;
@@ -37,24 +37,24 @@ namespace AnaSound
     {
       #region Variablen
       NAudio.Dsp.Complex[] data;
-      double[] signal,fenster,summierteSpektren;
+      double[] signal, fenster, summierteSpektren;
       double[,] spgram;
       bool ende;
       double HzProLinie;
-      int maxAnzahl,nSpectren, nach, von, lFFT, überlp,nanzahl;
-      #endregion      
+      int maxAnzahl, nSpectren, nach, von, lFFT, überlp, nanzahl;
+      #endregion
       #region Setup
-         lFFT = 1 << FFTExp;
+      lFFT = 1 << FFTExp;
       //soviel bleibt beim Nachladen erhalten
       überlp = (int)Math.Round((1.0 - ÜberlappAnteil) * lFFT);
       maxAnzahl = (int)(AudioDatei.NSpl / (double)überlp / nMittel);
-         spgram = new double[maxAnzahl, (lFFT / 2) - 1];// 0 Hz weglassen
-    /// <summary> 
+      spgram = new double[maxAnzahl, (lFFT / 2) - 1];// 0 Hz weglassen
+      /// <summary> 
       /// Signalabschnitt, über den gerechnet wird.
       /// Diesmal kein Ringpuffer, sondern immer wieder nach vorne schieben
       /// </summary>  
-     data  = new NAudio.Dsp.Complex[lFFT];
-      summierteSpektren= new double[lFFT/2];
+      data = new NAudio.Dsp.Complex[lFFT];
+      summierteSpektren = new double[lFFT / 2];
       signal = new double[lFFT];
       fenster =
          new FensterFktn((uint)lFFT, FenTyp)
@@ -223,7 +223,7 @@ namespace AnaSound
           kHz5 = false;
           break;
         case "Harmon.":
-          Harmon=!Harmon;
+          Harmon = !Harmon;
           break;
         case "zeichne":
           myModel.Axes.Clear();
