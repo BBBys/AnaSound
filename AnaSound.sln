@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.4.11605.240 stable
+VisualStudioVersion = 18.4.11605.240
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnaSound", "AnaSound\AnaSound.csproj", "{C48FD7E8-3382-4BD5-88D5-77A3D18AD753}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -17,6 +17,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Projektmappenelemente", "{EDAA0548-53FF-42DC-842C-0FC495832BEC}"
 	ProjectSection(SolutionItems) = preProject
 		GUI.md = GUI.md
+		Readme.md = Readme.md
 	EndProjectSection
 EndProject
 Global

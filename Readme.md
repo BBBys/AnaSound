@@ -1,12 +1,29 @@
-# Audio-Bearbeitung und -Analyse
-## AnaSound
+** Audio-Bearbeitung und -Analyse **
+# AnaSound
 Analyseprogramm: Informationen über Wave-Dateien
 Zeitbereich: Signal, Leistung, AKF.
 Frequenzbereich: FFT, Leistungsdichtespektrum, Spektrogramm. 
-
-## Testsignal
+## Tastaturcodes
+was|Parameter|Code
+---|---|---
+zeichne Signal| |Strg-
+|-verlauf|S
+|-leistung|L
+|-AKF|A
+|-KKF|K
+# Testsignal
 Erzeugt unterschiedliche Signale
-
+# Hilfsprogramme
+**namespace ASHilfen**
+## ASDatei
+### ReadNext(), ReadNextMono(), ReadNextStereo()
+Liest das nächste Sample aus der Wave-Datei ein.
+Ziel|Quelle|wie?
+---|---|---
+Mono|Mono|direkt
+Mono|Stereo|Kanäle mitteln
+Stereo|Mono|Mono-Signal verdoppeln
+Stereo|Stereo|direkt
 # Weiteres
 ## verwendet
 * NAudio

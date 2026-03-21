@@ -62,6 +62,7 @@
             this.tslFehler = new System.Windows.Forms.ToolStripStatusLabel();
             this.tslWarnung = new System.Windows.Forms.ToolStripStatusLabel();
             this.wv1 = new NAudio.Gui.WaveViewer();
+            this.zeichneKKFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -79,7 +80,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(970, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(970, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -91,7 +92,7 @@
             this.schließeToolStripMenuItem,
             this.endeToolStripMenuItem});
             this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
-            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(68, 29);
+            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(57, 24);
             this.dateiToolStripMenuItem.Text = "Datei";
             // 
             // öffnenToolStripMenuItem
@@ -99,7 +100,7 @@
             this.öffnenToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("öffnenToolStripMenuItem.Image")));
             this.öffnenToolStripMenuItem.Name = "öffnenToolStripMenuItem";
             this.öffnenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.öffnenToolStripMenuItem.Size = new System.Drawing.Size(225, 30);
+            this.öffnenToolStripMenuItem.Size = new System.Drawing.Size(186, 24);
             this.öffnenToolStripMenuItem.Text = "öffne";
             this.öffnenToolStripMenuItem.Click += new System.EventHandler(this.öffnenToolStripMenuItem_Click);
             // 
@@ -107,7 +108,7 @@
             // 
             this.schreibeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("schreibeToolStripMenuItem.Image")));
             this.schreibeToolStripMenuItem.Name = "schreibeToolStripMenuItem";
-            this.schreibeToolStripMenuItem.Size = new System.Drawing.Size(225, 30);
+            this.schreibeToolStripMenuItem.Size = new System.Drawing.Size(186, 24);
             this.schreibeToolStripMenuItem.Text = "schreibe";
             this.schreibeToolStripMenuItem.Click += new System.EventHandler(this.schreibeToolStripMenuItem_Click);
             // 
@@ -116,7 +117,7 @@
             this.schließeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("schließeToolStripMenuItem.Image")));
             this.schließeToolStripMenuItem.Name = "schließeToolStripMenuItem";
             this.schließeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.schließeToolStripMenuItem.Size = new System.Drawing.Size(225, 30);
+            this.schließeToolStripMenuItem.Size = new System.Drawing.Size(186, 24);
             this.schließeToolStripMenuItem.Text = "schließe";
             this.schließeToolStripMenuItem.Click += new System.EventHandler(this.schließeToolStripMenuItem_Click);
             // 
@@ -125,7 +126,7 @@
             this.endeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("endeToolStripMenuItem.Image")));
             this.endeToolStripMenuItem.Name = "endeToolStripMenuItem";
             this.endeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.endeToolStripMenuItem.Size = new System.Drawing.Size(225, 30);
+            this.endeToolStripMenuItem.Size = new System.Drawing.Size(186, 24);
             this.endeToolStripMenuItem.Text = "Ende";
             this.endeToolStripMenuItem.Click += new System.EventHandler(this.endeToolStripMenuItem_Click);
             // 
@@ -134,7 +135,7 @@
             this.inhaltToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ifnoToolStripMenuItem});
             this.inhaltToolStripMenuItem.Name = "inhaltToolStripMenuItem";
-            this.inhaltToolStripMenuItem.Size = new System.Drawing.Size(72, 29);
+            this.inhaltToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
             this.inhaltToolStripMenuItem.Text = "Inhalt";
             // 
             // ifnoToolStripMenuItem
@@ -142,7 +143,7 @@
             this.ifnoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("ifnoToolStripMenuItem.Image")));
             this.ifnoToolStripMenuItem.Name = "ifnoToolStripMenuItem";
             this.ifnoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.ifnoToolStripMenuItem.Size = new System.Drawing.Size(214, 30);
+            this.ifnoToolStripMenuItem.Size = new System.Drawing.Size(154, 24);
             this.ifnoToolStripMenuItem.Text = "Info";
             this.ifnoToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 
@@ -151,16 +152,17 @@
             this.zeitToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.zeichneSignalToolStripMenuItem,
             this.zeichneLeistungToolStripMenuItem,
-            this.zeichneAKFToolStripMenuItem});
+            this.zeichneAKFToolStripMenuItem,
+            this.zeichneKKFToolStripMenuItem});
             this.zeitToolStripMenuItem.Name = "zeitToolStripMenuItem";
-            this.zeitToolStripMenuItem.Size = new System.Drawing.Size(56, 29);
+            this.zeitToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
             this.zeitToolStripMenuItem.Text = "Zeit";
             // 
             // zeichneSignalToolStripMenuItem
             // 
             this.zeichneSignalToolStripMenuItem.Name = "zeichneSignalToolStripMenuItem";
             this.zeichneSignalToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.zeichneSignalToolStripMenuItem.Size = new System.Drawing.Size(292, 30);
+            this.zeichneSignalToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
             this.zeichneSignalToolStripMenuItem.Text = "zeichne Signal";
             this.zeichneSignalToolStripMenuItem.Click += new System.EventHandler(this.zeichneToolStripMenuItem_Click);
             // 
@@ -168,7 +170,7 @@
             // 
             this.zeichneLeistungToolStripMenuItem.Name = "zeichneLeistungToolStripMenuItem";
             this.zeichneLeistungToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-            this.zeichneLeistungToolStripMenuItem.Size = new System.Drawing.Size(292, 30);
+            this.zeichneLeistungToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
             this.zeichneLeistungToolStripMenuItem.Text = "zeichne Leistung";
             this.zeichneLeistungToolStripMenuItem.Click += new System.EventHandler(this.zeichneLeistungToolStripMenuItem_Click);
             // 
@@ -176,7 +178,7 @@
             // 
             this.zeichneAKFToolStripMenuItem.Name = "zeichneAKFToolStripMenuItem";
             this.zeichneAKFToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.zeichneAKFToolStripMenuItem.Size = new System.Drawing.Size(292, 30);
+            this.zeichneAKFToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
             this.zeichneAKFToolStripMenuItem.Text = "zeichne AKF";
             this.zeichneAKFToolStripMenuItem.Click += new System.EventHandler(this.zeichneAKFToolStripMenuItem_Click);
             // 
@@ -187,14 +189,14 @@
             this.tsmPSD,
             this.specgramToolStripMenuItem});
             this.frequenzToolStripMenuItem.Name = "frequenzToolStripMenuItem";
-            this.frequenzToolStripMenuItem.Size = new System.Drawing.Size(102, 29);
+            this.frequenzToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
             this.frequenzToolStripMenuItem.Text = "Frequenz";
             // 
             // tsmFFT
             // 
             this.tsmFFT.Name = "tsmFFT";
             this.tsmFFT.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.tsmFFT.Size = new System.Drawing.Size(243, 30);
+            this.tsmFFT.Size = new System.Drawing.Size(204, 24);
             this.tsmFFT.Text = "FFT";
             this.tsmFFT.Click += new System.EventHandler(this.tsmFFT_Click);
             // 
@@ -202,7 +204,7 @@
             // 
             this.tsmPSD.Name = "tsmPSD";
             this.tsmPSD.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.tsmPSD.Size = new System.Drawing.Size(243, 30);
+            this.tsmPSD.Size = new System.Drawing.Size(204, 24);
             this.tsmPSD.Text = "PSD";
             this.tsmPSD.Click += new System.EventHandler(this.tsmPSD_Click);
             // 
@@ -210,7 +212,7 @@
             // 
             this.specgramToolStripMenuItem.Name = "specgramToolStripMenuItem";
             this.specgramToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.specgramToolStripMenuItem.Size = new System.Drawing.Size(243, 30);
+            this.specgramToolStripMenuItem.Size = new System.Drawing.Size(204, 24);
             this.specgramToolStripMenuItem.Text = "Spec\'gram";
             this.specgramToolStripMenuItem.Click += new System.EventHandler(this.specgramToolStripMenuItem_Click);
             // 
@@ -219,14 +221,14 @@
             this.filterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.apapToolStripMenuItem});
             this.filterToolStripMenuItem.Name = "filterToolStripMenuItem";
-            this.filterToolStripMenuItem.Size = new System.Drawing.Size(66, 29);
+            this.filterToolStripMenuItem.Size = new System.Drawing.Size(54, 24);
             this.filterToolStripMenuItem.Text = "Filter";
             // 
             // apapToolStripMenuItem
             // 
             this.apapToolStripMenuItem.Name = "apapToolStripMenuItem";
             this.apapToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.apapToolStripMenuItem.Size = new System.Drawing.Size(210, 30);
+            this.apapToolStripMenuItem.Size = new System.Drawing.Size(170, 24);
             this.apapToolStripMenuItem.Text = "Adap";
             this.apapToolStripMenuItem.Click += new System.EventHandler(this.apapToolStripMenuItem_Click);
             // 
@@ -236,27 +238,27 @@
             this.playToolStripMenuItem,
             this.stopToolStripMenuItem});
             this.audioToolStripMenuItem.Name = "audioToolStripMenuItem";
-            this.audioToolStripMenuItem.Size = new System.Drawing.Size(74, 29);
+            this.audioToolStripMenuItem.Size = new System.Drawing.Size(61, 24);
             this.audioToolStripMenuItem.Text = "Audio";
             // 
             // playToolStripMenuItem
             // 
             this.playToolStripMenuItem.Name = "playToolStripMenuItem";
-            this.playToolStripMenuItem.Size = new System.Drawing.Size(210, 30);
+            this.playToolStripMenuItem.Size = new System.Drawing.Size(107, 24);
             this.playToolStripMenuItem.Text = "play";
             this.playToolStripMenuItem.Click += new System.EventHandler(this.spieleAbToolStripMenuItem_Click);
             // 
             // stopToolStripMenuItem
             // 
             this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
-            this.stopToolStripMenuItem.Size = new System.Drawing.Size(210, 30);
+            this.stopToolStripMenuItem.Size = new System.Drawing.Size(107, 24);
             this.stopToolStripMenuItem.Text = "stop";
             this.stopToolStripMenuItem.Click += new System.EventHandler(this.stopToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(75, 29);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -285,25 +287,25 @@
             // tslDatei
             // 
             this.tslDatei.Name = "tslDatei";
-            this.tslDatei.Size = new System.Drawing.Size(65, 25);
+            this.tslDatei.Size = new System.Drawing.Size(52, 25);
             this.tslDatei.Text = "Datei?";
             // 
             // tslChan
             // 
             this.tslChan.Name = "tslChan";
-            this.tslChan.Size = new System.Drawing.Size(50, 25);
+            this.tslChan.Size = new System.Drawing.Size(38, 25);
             this.tslChan.Text = "0 Ch";
             // 
             // tslSr
             // 
             this.tslSr.Name = "tslSr";
-            this.tslSr.Size = new System.Drawing.Size(58, 25);
+            this.tslSr.Size = new System.Drawing.Size(46, 25);
             this.tslSr.Text = "0 kHz";
             // 
             // tslBit
             // 
             this.tslBit.Name = "tslBit";
-            this.tslBit.Size = new System.Drawing.Size(49, 25);
+            this.tslBit.Size = new System.Drawing.Size(39, 25);
             this.tslBit.Text = "0 Bit";
             // 
             // tslEncoding
@@ -314,7 +316,7 @@
             // tslDauer
             // 
             this.tslDauer.Name = "tslDauer";
-            this.tslDauer.Size = new System.Drawing.Size(35, 25);
+            this.tslDauer.Size = new System.Drawing.Size(27, 25);
             this.tslDauer.Text = "0 s";
             // 
             // tslFehler
@@ -323,7 +325,7 @@
             this.tslFehler.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tslFehler.ForeColor = System.Drawing.Color.Yellow;
             this.tslFehler.Name = "tslFehler";
-            this.tslFehler.Size = new System.Drawing.Size(20, 25);
+            this.tslFehler.Size = new System.Drawing.Size(19, 25);
             this.tslFehler.Text = "_";
             // 
             // tslWarnung
@@ -331,7 +333,7 @@
             this.tslWarnung.BackColor = System.Drawing.Color.Yellow;
             this.tslWarnung.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tslWarnung.Name = "tslWarnung";
-            this.tslWarnung.Size = new System.Drawing.Size(20, 25);
+            this.tslWarnung.Size = new System.Drawing.Size(19, 25);
             this.tslWarnung.Text = "_";
             // 
             // wv1
@@ -345,6 +347,14 @@
             this.wv1.StartPosition = ((long)(0));
             this.wv1.TabIndex = 2;
             this.wv1.WaveStream = null;
+            // 
+            // zeichneKKFToolStripMenuItem
+            // 
+            this.zeichneKKFToolStripMenuItem.Name = "zeichneKKFToolStripMenuItem";
+            this.zeichneKKFToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.K)));
+            this.zeichneKKFToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
+            this.zeichneKKFToolStripMenuItem.Text = "zeichne KKF";
+            this.zeichneKKFToolStripMenuItem.Click += new System.EventHandler(this.zeichneKKFToolStripMenuItem_Click);
             // 
             // FASMain
             // 
@@ -401,6 +411,7 @@
     private System.Windows.Forms.ToolStripMenuItem tsmPSD;
     private NAudio.Gui.WaveViewer wv1;
     private System.Windows.Forms.ToolStripMenuItem specgramToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem zeichneKKFToolStripMenuItem;
   }
 }
 

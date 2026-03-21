@@ -45,6 +45,9 @@ namespace ASHilfen
     /// Dateilänge in Bytes
     /// </summary>
     public ulong Len { get; private set; }
+    /// <summary>
+    /// True, wenn 1 Kanal / Monoaufnahme, False wenn nicht / Stereo- oder komplexe Aufnahme
+    /// </summary>
     public bool Mono => Chan == 1;
     public float SigMin { get; private set; }
     public double Mittel { get; private set; }
@@ -530,14 +533,32 @@ namespace ASHilfen
       AudioReader?.Flush();
       AudioWriter?.Flush();
     }
-
+    /// <summary>
+    /// Kapselung von AudioReader.ReadNextSampleFrame(), keine  weitere Bearbeitung
+    /// </summary>
+    /// <returns>1 oder mehr float-Werte</returns>
     public float[] ReadNext()
     {
       return AudioReader.ReadNextSampleFrame();
     }
 
     /// <summary>
+    /// Ein Stereo-Sample lesen, 0 wenn zuende
+    /// Wenn kein Stereo, dann werden die Mono-Werte verdoppelt
+    /// ReadNext() liest automatisch 2 Werte bei Stereo
+    /// </summary>
+    /// <returns>2 Samples oder 0</returns>
+    public (float,float )ReadNextStereo()
+    {
+      if (Ende())
+        return (0,0);
+      float[] fc = ReadNext();
+      return Mono ? (fc[0],fc[0]) : (fc[0] , fc[1]);
+    }
+
+    /// <summary>
     /// Ein Sample lesen, 0 wenn zuende, Stereo in Mono wandeln
+    /// ReadNext() liest automatisch 2 Werte bei Stereo
     /// </summary>
     /// <returns>Sample oder 0</returns>
     public float ReadNextMono()

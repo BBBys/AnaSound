@@ -18,6 +18,7 @@ namespace AnaSound
     private ASDatei AudioDatei = null;
     private FASPower FPower = null;
     private FASAKF FAKF = null;
+    private FASKKF FKKF = null;
     private FASFFT FFFT = null;
     private FASPSD FPSD = null;
     private FASSpec FSpec = null;
@@ -309,6 +310,14 @@ namespace AnaSound
         spektrum[i].Y = 0;
       }
       NAudio.Dsp.FastFourierTransform.FFT(true, exponent, spektrum);
+    }
+
+    private void zeichneKKFToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      FKKF?.Dispose();
+      FKKF = new FASKKF(AudioDatei);
+      FKKF.Show();
+
     }
   }
 }
