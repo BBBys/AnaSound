@@ -54,13 +54,15 @@ namespace AnaSound
     /// 
     private void Berechne(double pDauer)
     {
-      tslOK.Visible = false;      if (pDauer < .0001)
+      tslOK.Visible = false;
+      if (pDauer < .0001)
         return;
       if (AudioDatei == null)
         return;
       ulong nRingPuffer, PufferZeiger;
       float nAKFsBerechnet;
-      tslWarten.Visible = true;statusStrip1.Refresh();
+      tslWarten.Visible = true;
+      statusStrip1.Refresh();
 
       DauerIntervall = pDauer;
       nLagsAkf = (uint)Math.Ceiling(AudioDatei.SRate * DauerIntervall);
@@ -246,7 +248,7 @@ namespace AnaSound
     private void FASAKF_Shown(object sender, EventArgs e)
     { }
 
-   
+
     private void tsbFq_Click(object sender, EventArgs e)
     {
       ToolStripButton tsb = (ToolStripButton)sender;

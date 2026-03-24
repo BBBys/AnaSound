@@ -26,7 +26,7 @@ namespace AnaSound
     /// Signalabschnitt, doppelte Länge, mit 0 aufgefüllt
     /// 2 Puffer für 2 Kanäle
     /// </summary>
-    private float[] ringPuffer1 = null,ringPuffer2 = null;
+    private float[] ringPuffer1 = null, ringPuffer2 = null;
     private float[] KKFData = null;
     private float[] KKFTeil = null;
     // private float[] KKFZeit = null;
@@ -74,7 +74,7 @@ namespace AnaSound
       nKKFsBerechnet = 0;
       ///Puffer vorbelegen
       for (ulong i = 0; i < nRingPuffer; i++)//Signal einlesen
-        (ringPuffer1[i], ringPuffer2[i] )= AudioDatei.ReadNextStereo();
+        (ringPuffer1[i], ringPuffer2[i]) = AudioDatei.ReadNextStereo();
       Debug.WriteLine(ringPuffer1.Sum() / nRingPuffer);
       Debug.WriteLine(ringPuffer2.Sum() / nRingPuffer);
       //for Ringpuffer vorbelegen

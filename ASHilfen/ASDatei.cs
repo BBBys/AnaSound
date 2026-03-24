@@ -548,12 +548,12 @@ namespace ASHilfen
     /// ReadNext() liest automatisch 2 Werte bei Stereo
     /// </summary>
     /// <returns>2 Samples oder 0</returns>
-    public (float,float )ReadNextStereo()
+    public (float, float) ReadNextStereo()
     {
       if (Ende())
-        return (0,0);
+        return (0, 0);
       float[] fc = ReadNext();
-      return Mono ? (fc[0],fc[0]) : (fc[0] , fc[1]);
+      return Mono ? (fc[0], fc[0]) : (fc[0], fc[1]);
     }
 
     /// <summary>
