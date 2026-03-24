@@ -1,6 +1,11 @@
 # GUI-Festlegungen für AnaSound
 Stand 2026-03-17
-
+# Tastaturcodes
+Aktion|Bezeichnung|Code
+---:|---|---
+Datei öffnen|öffne|Strg-o
+Datei schließen/freigeben|schließe|Strg-x
+Programm beenden|beende|Strg-q
 # Statuszeile
 Bedeutumg|Name|Text|Bold?|Fore|Back
 ---:|---|---|---|---|---
