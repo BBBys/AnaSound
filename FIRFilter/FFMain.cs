@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ASHilfen;
+using NAudio.Dsp;
+using NAudio.Wave;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,22 +13,21 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ASHilfen;
-using NAudio.Dsp;
-using NAudio.Wave;
-
+using static System.Windows.Forms.AxHost;
 namespace FIRFilter
 {
-  public partial class FIRMain : Form
+
+  public partial class FFMain : Form
   {
     private readonly string SDatei;
     private readonly string SPfad;
     private readonly string FDatei;
-    private readonly string FPfad; private ASDatei AudioDatei = null;
-
+    private readonly string FPfad;
+    private ASDatei AudioDatei = null, FilterDatei = null;
     private readonly Properties.Settings Props;
+    private string WavDateiGewählt, FltDateiGewählt;
 
-    public FIRMain()
+    public FFMain()
     {
       InitializeComponent();
       Assembly assembly = Assembly.GetExecutingAssembly();
@@ -52,15 +54,14 @@ namespace FIRFilter
       Props.DatenDatei = neueDatei;
       Props.DatenPfad = neuerPfad;
       Props.Save();*/
-
     }
 
-    private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
+    private void toolStripMenuItem2_Click(object sender, EventArgs e)
     {
       Close();
     }
 
-    private void leseAudioToolStripMenuItem_Click(object sender, EventArgs e)
+    private void öffneSigalToolStripMenuItem_Click(object sender, EventArgs e)
     {
 
       ofdEingabe.FileName = Path.Combine(SPfad, SDatei);
@@ -69,8 +70,8 @@ namespace FIRFilter
         AudioDatei?.Dispose();
         WavDateiGewählt = ofdEingabe.FileName;
         tslDatei.Text = ofdEingabe.SafeFileName;
-        Props.DatenDatei = Path.GetFileName(WavDateiGewählt);
-        Props.DatenPfad = Path.GetFullPath(WavDateiGewählt);
+        Props.SoundDatei = Path.GetFileName(WavDateiGewählt);
+        Props.SoundPfad = Path.GetFullPath(WavDateiGewählt);
         Props.Save();
         AudioDatei = new ASDatei(WavDateiGewählt);
         tslFehler.Text = AudioDatei.HatFehler ? AudioDatei.FehlerText : "";
@@ -79,11 +80,44 @@ namespace FIRFilter
         tslSr.Text = $"{AudioDatei.SRate / 1000} KHz";
         tslDauer.Text = $"{AudioDatei.DauerGanzeMin}m {AudioDatei.DauerRestSek:f2}s";
         tslBit.Text = $"{AudioDatei.BitProSample} Bit";
-        tslEncoding.Text = AudioDatei.Encoding;
-        wv1.WaveStream = AudioDatei.AudioReader;
+        tslEncoding.Text =         AudioDatei.Encoding;
+        /*wv1.WaveStream = AudioDatei.AudioReader;
         wv1.PerformAutoScale();
-        wv1.Update();
+        wv1.Update();*/
       }
+
+    }
+
+    private void schließeSignalToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+
+      AudioDatei?.Dispose();
+      AudioDatei = null;
+
+    }
+
+    private void öffneFilterToolStripMenuItem_Click(object sender, EventArgs e)
+    {Debug.WriteLine(statusStrip1.Width);
+      ofdEingabe.FileName = Path.Combine(FPfad, FDatei);
+      if (ofdEingabe.ShowDialog() == DialogResult.OK)
+      {
+        FilterDatei?.Dispose();
+        FltDateiGewählt = ofdEingabe.FileName;
+        tslFDatei.Text = ofdEingabe.SafeFileName;
+        Props.FilterDatei = Path.GetFileName(WavDateiGewählt);
+        Props.FilterPfad = Path.GetFullPath(WavDateiGewählt);
+        Props.Save();
+        FilterDatei = new ASDatei(FltDateiGewählt);
+        tslFFehler.Text = FilterDatei.HatFehler ? AudioDatei.FehlerText : "";
+        tslFWarnung.Text = FilterDatei.HatWarnung ? AudioDatei.WarnungText : "";
+        tslFChan.Text = $"{FilterDatei.Chan} Ch";
+        tslFSr.Text = $"{FilterDatei.SRate / 1000} KHz";
+        tslFDauer.Text = $"{FilterDatei.DauerGanzeMin}m {AudioDatei.DauerRestSek:f2}s";
+        tslFBit.Text = $"{FilterDatei.BitProSample} Bit";
+        //tslFEncoding.Text = FilterDatei.Encoding;
+
+      }
+      Debug.WriteLine(statusStrip1.Width);
     }
   }
 }

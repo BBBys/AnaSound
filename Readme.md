@@ -19,5 +19,5 @@ Erzeugt unterschiedliche Signale
 # Quellen
 * Meyer (2014): Signalverarbeitung : Analoge und digitale Signale, Systeme und Filter
 * Microsoft Copilot: Vorschläge für die Implementierung von Funktionen
-* Fensterfunktion, Wikipedia https://de.wikipedia.org/w/index.php?title=Fensterfunktion&oldid=240252100
-* Schallgeschwindigkeit, Wikipedia, https://de.wikipedia.org/w/index.php?title=Schallgeschwindigkeit&oldid=250821980
+* [Fensterfunktion, Wikipedia](https://de.wikipedia.org/w/index.php?title=Fensterfunktion&oldid=240252100)
+* [Schallgeschwindigkeit, Wikipedia](https://de.wikipedia.org/w/index.php?title=Schallgeschwindigkeit&oldid=250821980)

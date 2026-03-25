@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Pr
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIRFilter", "FIRFilter\FIRFilter.csproj", "{4BE722F7-10B2-4754-AC18-A8BBF4C7D1A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,10 @@ Global
 		{28761508-76A1-4958-8003-F4ABCD3097D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28761508-76A1-4958-8003-F4ABCD3097D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28761508-76A1-4958-8003-F4ABCD3097D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BE722F7-10B2-4754-AC18-A8BBF4C7D1A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BE722F7-10B2-4754-AC18-A8BBF4C7D1A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BE722F7-10B2-4754-AC18-A8BBF4C7D1A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BE722F7-10B2-4754-AC18-A8BBF4C7D1A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

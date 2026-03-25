@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
 [assembly: AssemblyTitle("FIRFilter")]
-[assembly: AssemblyDescription("Filterun von Audio-Dateien")]
+[assembly: AssemblyDescription("FIR-Filterung von Sound-Daten")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Burkhard Borys Vellmar")]
 [assembly: AssemblyProduct("Sound")]
@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Die folgende GUID bestimmt die ID der Typbibliothek, wenn dieses Projekt für COM verfügbar gemacht wird
-[assembly: Guid("b54bf455-bb17-47c9-9a3c-b7c9a850d9ba")]
+[assembly: Guid("4be722f7-10b2-4754-ac18-a8bbf4c7d1a2")]
 
 // Versionsinformationen für eine Assembly bestehen aus den folgenden vier Werten:
 //

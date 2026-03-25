@@ -16,7 +16,7 @@ namespace FIRFilter
     {
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-      Application.Run(new FIRMain());
+      Application.Run(new FFMain());
     }
   }
 }
