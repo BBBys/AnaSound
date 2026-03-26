@@ -99,7 +99,7 @@
             this.öffnenToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("öffnenToolStripMenuItem.Image")));
             this.öffnenToolStripMenuItem.Name = "öffnenToolStripMenuItem";
             this.öffnenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.öffnenToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            this.öffnenToolStripMenuItem.Size = new System.Drawing.Size(186, 24);
             this.öffnenToolStripMenuItem.Text = "öffne";
             this.öffnenToolStripMenuItem.Click += new System.EventHandler(this.öffnenToolStripMenuItem_Click);
             // 
@@ -107,7 +107,7 @@
             // 
             this.schreibeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("schreibeToolStripMenuItem.Image")));
             this.schreibeToolStripMenuItem.Name = "schreibeToolStripMenuItem";
-            this.schreibeToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            this.schreibeToolStripMenuItem.Size = new System.Drawing.Size(186, 24);
             this.schreibeToolStripMenuItem.Text = "schreibe";
             this.schreibeToolStripMenuItem.Click += new System.EventHandler(this.schreibeToolStripMenuItem_Click);
             // 
@@ -116,7 +116,7 @@
             this.schließeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("schließeToolStripMenuItem.Image")));
             this.schließeToolStripMenuItem.Name = "schließeToolStripMenuItem";
             this.schließeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.schließeToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            this.schließeToolStripMenuItem.Size = new System.Drawing.Size(186, 24);
             this.schließeToolStripMenuItem.Text = "schließe";
             this.schließeToolStripMenuItem.Click += new System.EventHandler(this.schließeToolStripMenuItem_Click);
             // 
@@ -125,7 +125,7 @@
             this.endeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("endeToolStripMenuItem.Image")));
             this.endeToolStripMenuItem.Name = "endeToolStripMenuItem";
             this.endeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.endeToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            this.endeToolStripMenuItem.Size = new System.Drawing.Size(186, 24);
             this.endeToolStripMenuItem.Text = "beende";
             this.endeToolStripMenuItem.Click += new System.EventHandler(this.endeToolStripMenuItem_Click);
             // 
@@ -242,14 +242,16 @@
             // playToolStripMenuItem
             // 
             this.playToolStripMenuItem.Name = "playToolStripMenuItem";
-            this.playToolStripMenuItem.Size = new System.Drawing.Size(107, 24);
+            this.playToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.playToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.playToolStripMenuItem.Text = "play";
             this.playToolStripMenuItem.Click += new System.EventHandler(this.spieleAbToolStripMenuItem_Click);
             // 
             // stopToolStripMenuItem
             // 
             this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
-            this.stopToolStripMenuItem.Size = new System.Drawing.Size(107, 24);
+            this.stopToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.stopToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.stopToolStripMenuItem.Text = "stop";
             this.stopToolStripMenuItem.Click += new System.EventHandler(this.stopToolStripMenuItem_Click);
             // 

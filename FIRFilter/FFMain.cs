@@ -88,6 +88,14 @@ namespace FIRFilter
 
     }
 
+    private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      AboutBox1 f = new AboutBox1();
+      _ = f.ShowDialog();
+      f.Dispose();
+
+    }
+
     private void schließeSignalToolStripMenuItem_Click(object sender, EventArgs e)
     {
 

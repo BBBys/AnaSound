@@ -547,6 +547,17 @@ namespace ASHilfen
       float[] fc = ReadNext();
       return Mono ? fc[0] : (float)((fc[0] + fc[1]) * 0.5);
     }
+    /// <summary>
+    /// Ein Sample lesen, 0 wenn zuende, Mono durch Verdoppelung in Stereo wandeln
+    /// </summary>
+    /// <returns>Sample (float,float) oder (0,0)</returns>
+    public (float,float) ReadNextStereo()
+    {
+      if (Ende())
+        return (0,0);
+      float[] fc = ReadNext();
+      return Mono ? (fc[0],fc[0]) : (fc[0] ,fc[1]);
+    }
 
     /// <summary>
     /// Ein Abschnitt der Audiodatei einlesen

@@ -6,6 +6,8 @@ Aktion|Bezeichnung|Code
 Datei öffnen|öffne|Strg-o
 Datei schließen/freigeben|schließe|Strg-x
 Programm beenden|beende|Strg-q
+Audio abspielen|play|Strg-p
+Audio anhalten|stop|Strg-s
 # Statuszeile
 Bedeutumg|Name|Text|Bold?|Fore|Back
 ---:|---|---|---|---|---

@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("ASHilfen")]
 [assembly: AssemblyDescription("Hilfen für Audiosignalverarbeitung")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("B. Borys Vellmar")]
-[assembly: AssemblyProduct("ASHilfen")]
-[assembly: AssemblyCopyright("Copyright ©  2025 B. Borys")]
+[assembly: AssemblyCompany("Burkhard Borys Vellmar")]
+[assembly: AssemblyProduct("Sound")]
+[assembly: AssemblyCopyright("Copyright © Borys 2025-2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,6 +29,6 @@ using System.Runtime.InteropServices;
 //      Buildnummer
 //      Revision
 //
-[assembly: AssemblyVersion("1.1.1.1")]
-[assembly: AssemblyFileVersion("1.1.1.1")]
+[assembly: AssemblyVersion("1.1.2.2")]
+[assembly: AssemblyFileVersion("1.1.2.2")]
 [assembly: NeutralResourcesLanguage("de-DE")]

@@ -3,51 +3,50 @@ using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using System;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
+
 namespace AnaSound
 {
-  public partial class FASAKF : Form
+  public partial class FASKKF : Form
   {
-    private enum AKFTyp { amKein, amZeit, amWeg, amFrequenz };
-    private AKFTyp akfTyp = AKFTyp.amKein;
+    private enum KKFTyp { amKein, amZeit, amWeg, amFrequenz };
+    private KKFTyp kkfTyp = KKFTyp.amKein;
     private readonly LineSeries Linie = new LineSeries { };
     private readonly PlotModel myModel = null;
     private readonly ASDatei AudioDatei = null;
     /// <summary>
-    /// Anzahl AKF-Werte für die gewünschte Dauer zu berechnen/zeichnen
+    /// Anzahl KKF-Werte für die gewünschte Dauer zu berechnen/zeichnen
     /// </summary>
-    private ulong nLagsAkf;
+    private ulong nLagsKkf;
 
     /// <summary>
     /// Signalabschnitt, doppelte Länge, mit 0 aufgefüllt
+    /// 2 Puffer für 2 Kanäle
     /// </summary>
-    private float[] ringPuffer = null;
-    private float[] AKFData = null;
-    private float[] AKFTeil = null;
-    // private float[] AKFZeit = null;
-    private float akfWert;
+    private float[] ringPuffer1 = null,ringPuffer2 = null;
+    private float[] KKFData = null;
+    private float[] KKFTeil = null;
+    // private float[] KKFZeit = null;
+    private float kkfWert;
     /// <summary>
-    /// Dauer der AKF-Funktion
+    /// Dauer der KKF-Funktion
     /// </summary>
     private double DauerIntervall = 0;
-    public FASAKF()
+
+    public FASKKF()
     {
       InitializeComponent();
       myModel = new PlotModel();
     }
-    public FASAKF(ASDatei paudio) : this()
+    public FASKKF(ASDatei paudio) : this()
     {
       AudioDatei = paudio;
     }
-    //private void Berechne()
-    //{
-    //  Berechne(DauerIntervall);
-    //}
-
     /// <summary>
-    /// Abschnittsweise Berechnung der AKF
+    /// Abschnittsweise Berechnung der KKF
     /// komplett neue Berechnung, danach wird Zeichne(...) aufgerufen
     /// </summary>
     /// <param name="pDauer">Intervalldauer in s</param>
@@ -60,34 +59,36 @@ namespace AnaSound
       if (AudioDatei == null)
         return;
       ulong nRingPuffer, PufferZeiger;
-      float nAKFsBerechnet;
+      float nKKFsBerechnet;
       tslWarten.Visible = true;
       statusStrip1.Refresh();
 
       DauerIntervall = pDauer;
-      nLagsAkf = (uint)Math.Ceiling(AudioDatei.SRate * DauerIntervall);
-      nRingPuffer = 2 * nLagsAkf;
-      ringPuffer = new float[nRingPuffer];
-      AKFData = new float[nLagsAkf];
-      AKFTeil = new float[nLagsAkf];
+      nLagsKkf = (uint)Math.Ceiling(AudioDatei.SRate * DauerIntervall);
+      nRingPuffer = 2 * nLagsKkf;
+      ringPuffer1 = new float[nRingPuffer];
+      ringPuffer2 = new float[nRingPuffer];
+      KKFData = new float[nLagsKkf];
+      KKFTeil = new float[nLagsKkf];
       AudioDatei.Reset();
-      nAKFsBerechnet = 0;
+      nKKFsBerechnet = 0;
       ///Puffer vorbelegen
       for (ulong i = 0; i < nRingPuffer; i++)//Signal einlesen
-        ringPuffer[i] = AudioDatei.ReadNextMono();
-      Debug.WriteLine(ringPuffer.Sum() / nRingPuffer);
+        (ringPuffer1[i], ringPuffer2[i] )= AudioDatei.ReadNextStereo();
+      Debug.WriteLine(ringPuffer1.Sum() / nRingPuffer);
+      Debug.WriteLine(ringPuffer2.Sum() / nRingPuffer);
       //for Ringpuffer vorbelegen
       //Puffer ist voll
       //Signal beginnt bei 0
       PufferZeiger = 0;
-      //AKF Berechnen, jedes Lag ein Punkt
+      //KKF Berechnen, jedes Lag ein Punkt
       do
       {
         ///für jedes Lag
-        for (ulong lag = 0; lag < nLagsAkf; lag++)
+        for (ulong lag = 0; lag < nLagsKkf; lag++)
         {
-          akfWert = 0;
-          for (ulong SignalPunkt = 0; SignalPunkt < nLagsAkf; SignalPunkt++)
+          kkfWert = 0;
+          for (ulong SignalPunkt = 0; SignalPunkt < nLagsKkf; SignalPunkt++)
           {
             /*
              * für lag=0, SignalPunkt=0...Lags-1:
@@ -102,22 +103,23 @@ namespace AnaSound
              * aber alles noch mal verschoben zum Pufferzeiger
              * und bei Überlauf modulo nRingPuffer
              */
-            akfWert +=
-              ringPuffer[(SignalPunkt + PufferZeiger) % nRingPuffer] *
-              ringPuffer[(lag + SignalPunkt + PufferZeiger) % nRingPuffer];
+            //todo prüfen, ob modulo richtig ist oder besser nullsetzen und dadurch ausgleiten
+            kkfWert +=
+              ringPuffer1[(SignalPunkt + PufferZeiger) % nRingPuffer] *
+              ringPuffer2[(lag + SignalPunkt + PufferZeiger) % nRingPuffer];
           }
-          AKFTeil[lag] = akfWert;
-        }//for über lag alle AKF-Punkte berechnen
-        ///berechnete AKF speichern
-        //for (ulong lag = 0; lag < nLagsAkf; lag++)
-        //  AKFData[lag] += AKFTeil[lag];
-        AKFData = AKFData.Zip(AKFTeil, (a, b) => a + b).ToArray();
-        nAKFsBerechnet++;
-        for (ulong nWeiter = 0; nWeiter < nLagsAkf; nWeiter++)
+          KKFTeil[lag] = kkfWert;
+        }//for über lag alle KKF-Punkte berechnen
+        ///berechnete KKF speichern
+        //for (ulong lag = 0; lag < nLagsKkf; lag++)
+        //  KKFData[lag] += KKFTeil[lag];
+        KKFData = KKFData.Zip(KKFTeil, (a, b) => a + b).ToArray();
+        nKKFsBerechnet++;
+        for (ulong nWeiter = 0; nWeiter < nLagsKkf; nWeiter++)
         {
           //und jeweils einen Signalwert weiter, dazu:
           //den Wert vorne überschreiben
-          ringPuffer[PufferZeiger] = AudioDatei.ReadNextMono();
+          (ringPuffer1[PufferZeiger], ringPuffer2[PufferZeiger]) = AudioDatei.ReadNextStereo();
           //dann den Anfangspunkt eins weiter und
           //der neue Wert wird der Letzte in der Kette
           PufferZeiger = (PufferZeiger + 1) % nRingPuffer;
@@ -125,15 +127,15 @@ namespace AnaSound
       } while (!AudioDatei.Ende());
       Width = 1000;
       Height = 300;
-      Text = $"AKF über {DauerIntervall} s ({nLagsAkf} Samples), Mittel aus {nAKFsBerechnet} Berechnungen";
-      //for (ulong lag = 0; lag < nLagsAkf; lag++)
-      //  AKFData[lag] /= nAKFsBerechnet;
-      AKFData = AKFData.Select(x => x / nAKFsBerechnet).ToArray();
+      Text = $"KKF über {DauerIntervall} s ({nLagsKkf} Samples), Mittel aus {nKKFsBerechnet} Berechnungen";
+      //for (ulong lag = 0; lag < nLagsKkf; lag++)
+      //  KKFData[lag] /= nKKFsBerechnet;
+      KKFData = KKFData.Select(x => x / nKKFsBerechnet).ToArray();
       tslWarten.Visible = false;
-      Zeichne(AKFData, akfTyp);
+      Zeichne(KKFData, kkfTyp);
       tslOK.Visible = true;
     }
-    private void Zeichne(float[] daten, AKFTyp at)
+    private void Zeichne(float[] daten, KKFTyp at)
     {
       Linie.Points.Clear();
       if (daten == null)
@@ -141,23 +143,23 @@ namespace AnaSound
       double faktor;
       switch (at)
       {
-        case AKFTyp.amFrequenz:
+        case KKFTyp.amFrequenz:
           faktor = AudioDatei.SRate;
           break;
-        case AKFTyp.amWeg:
+        case KKFTyp.amWeg:
           faktor = AudioDatei.Schallgewindigkeit / AudioDatei.SRate;
           break;
-        case AKFTyp.amZeit:
+        case KKFTyp.amZeit:
           faktor = 1.0 / AudioDatei.SRate;
           break;
-        case AKFTyp.amKein:
+        case KKFTyp.amKein:
           faktor = 1;
           break;
         default:
-          throw new ArgumentOutOfRangeException("AKF-Typ", at.ToString());
+          throw new ArgumentOutOfRangeException("KKF-Typ", at.ToString());
       }
       for (int lag = 0; lag < daten.Length; lag++)
-        if (at == AKFTyp.amFrequenz)
+        if (at == KKFTyp.amFrequenz)
         { if (lag > 0) Linie.Points.Add(new DataPoint(faktor / lag, daten[lag])); }
         else
         { Linie.Points.Add(new DataPoint(faktor * lag, daten[lag])); }
@@ -168,12 +170,12 @@ namespace AnaSound
       plotView1.Model.InvalidatePlot(true);
       //  plotView1.Invalidate();
     }
-    private void setAxes(AKFTyp amt = AKFTyp.amKein)
+    private void setAxes(KKFTyp amt = KKFTyp.amKein)
     {
       myModel.Axes.Clear();
       switch (amt)
       {
-        case AKFTyp.amWeg:
+        case KKFTyp.amWeg:
           myModel.Axes.Add(new LinearAxis
           {
             MajorGridlineStyle = LineStyle.Solid,
@@ -182,7 +184,7 @@ namespace AnaSound
             Title = "Laufzeit",
           });
           break;
-        case AKFTyp.amZeit:
+        case KKFTyp.amZeit:
           myModel.Axes.Add(new LinearAxis
           {
             MajorGridlineStyle = LineStyle.Solid,
@@ -191,7 +193,7 @@ namespace AnaSound
             Title = "Lagzeit",
           });
           break;
-        case AKFTyp.amKein:
+        case KKFTyp.amKein:
           myModel.Axes.Add(new LinearAxis
           {
             MajorGridlineStyle = LineStyle.Solid,
@@ -208,14 +210,10 @@ namespace AnaSound
     MajorGridlineStyle = LineStyle.Solid,
     MinorGridlineStyle = LineStyle.Dot,
     Position = AxisPosition.Left,
-    Title = "AKF"
+    Title = "KKF"
   });
       //  myModel.ResetAllAxes();
     }
-
-    //private void FASAKF_Paint(object sender, PaintEventArgs e)
-    //{
-    //}
     private void tsb10_Click(object sender, EventArgs e)
     {
       Berechne(10);
@@ -230,6 +228,26 @@ namespace AnaSound
     {
       Berechne(0.1);
     }
+    private void tsbFq_Click(object sender, EventArgs e)
+    {
+      ToolStripButton tsb = (ToolStripButton)sender;
+      switch (tsb.Tag)
+      {
+        case "z":
+          kkfTyp = KKFTyp.amZeit;
+          break;
+        case "fq":
+          kkfTyp = KKFTyp.amFrequenz;
+          break;
+        case "w":
+          kkfTyp = KKFTyp.amWeg;
+          break;
+        default:
+          kkfTyp = KKFTyp.amKein;
+          break;
+      }
+      Zeichne(KKFData, kkfTyp);
+    }
 
     private void tsb001_Click(object sender, EventArgs e)
     {
@@ -241,33 +259,5 @@ namespace AnaSound
       Berechne(0.001);
     }
 
-    //private void FASPower_ResizeEnd(object sender, EventArgs e)
-    //{
-    //}
-
-    private void FASAKF_Shown(object sender, EventArgs e)
-    { }
-
-
-    private void tsbFq_Click(object sender, EventArgs e)
-    {
-      ToolStripButton tsb = (ToolStripButton)sender;
-      switch (tsb.Tag)
-      {
-        case "z":
-          akfTyp = AKFTyp.amZeit;
-          break;
-        case "fq":
-          akfTyp = AKFTyp.amFrequenz;
-          break;
-        case "w":
-          akfTyp = AKFTyp.amWeg;
-          break;
-        default:
-          akfTyp = AKFTyp.amKein;
-          break;
-      }
-      Zeichne(AKFData, akfTyp);
-    }
   }
 }
