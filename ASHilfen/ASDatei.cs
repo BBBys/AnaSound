@@ -99,7 +99,24 @@ namespace ASHilfen
       AudioWriter = new WaveFileWriter(DateimitPfad, WFmtObj);
     }
     public bool Ende() { return AudioReader.Position >= AudioReader.Length; }
-
+    public (float[],bool) SafeReadNext()
+    {
+      /// <summary>
+      /// sicheres Ausführen von
+      /// fc = AudioDatei.AudioReader.ReadNextSampleFrame();
+      /// </summary>
+      float[] fc;
+      bool istNull = false;
+      fc = this.AudioReader.ReadNextSampleFrame();
+      if (fc == null)
+      {istNull= true;
+        HatWarnung = true;
+        WarnungText = "null-Werte";
+        fc = new float[2];
+        fc[0] = fc[1] = 0;
+      }
+      return (fc,istNull);
+    }
     private void Analyse()
     {
       float[] fc;
@@ -115,8 +132,13 @@ namespace ASHilfen
       }
       for (ulong j = 0; j < NSpl; j++)//so viel PwrData
       {
-        fc = AudioReader.ReadNextSampleFrame();
-        if (Mono)
+        bool istNull;
+        (fc,istNull) = SafeReadNext();
+        if (istNull){
+          NSpl = j;
+          break;
+        }
+          if (Mono)
         {
           SigMax = Math.Max(SigMax, fc[0]);
           SigMin = Math.Min(SigMin, fc[0]);
@@ -530,33 +552,39 @@ namespace ASHilfen
       AudioReader?.Flush();
       AudioWriter?.Flush();
     }
-
+    /// <summary>
+    /// ReadNext() ist nur Kapselung von ReadNextSampleFrame()
+    /// </summary>
+    /// <returns></returns>
     public float[] ReadNext()
     {
       return AudioReader.ReadNextSampleFrame();
     }
-
+    
     /// <summary>
     /// Ein Sample lesen, 0 wenn zuende, Stereo in Mono wandeln
     /// </summary>
     /// <returns>Sample oder 0</returns>
-    public float ReadNextMono()
+    public (float,bool) ReadNextMono()
     {
+      float[] fc;bool istNull;
       if (Ende())
-        return 0;
-      float[] fc = ReadNext();
-      return Mono ? fc[0] : (float)((fc[0] + fc[1]) * 0.5);
+        return (0,true);
+      (fc,istNull) = SafeReadNext();
+      if (istNull)
+        return (0, true);
+            return Mono ? (fc[0],istNull) :( (float)((fc[0] + fc[1]) * 0.5),istNull);
     }
     /// <summary>
     /// Ein Sample lesen, 0 wenn zuende, Mono durch Verdoppelung in Stereo wandeln
     /// </summary>
     /// <returns>Sample (float,float) oder (0,0)</returns>
-    public (float,float) ReadNextStereo()
+    public (float, float) ReadNextStereo()
     {
       if (Ende())
-        return (0,0);
+        return (0, 0);
       float[] fc = ReadNext();
-      return Mono ? (fc[0],fc[0]) : (fc[0] ,fc[1]);
+      return Mono ? (fc[0], fc[0]) : (fc[0], fc[1]);
     }
 
     /// <summary>
@@ -581,7 +609,10 @@ namespace ASHilfen
           f = 0;
         else
         {
-          fc = ReadNext();
+          bool istNull;
+          (fc ,istNull)= SafeReadNext();
+          if (istNull)
+            break;
           f = Mono ? fc[0] : ((fc[0] + fc[1]) * 0.5);
         }
         signal[i] = f;

@@ -92,6 +92,7 @@ namespace AnaSound
       NrSampleAusDatei = 0;
       while (!AudioDatei.Ende())//für ganze Datei
       {
+        bool istNull = false;
         float f;
         float[] fc;// = new float[2];
         /// ein Intervall
@@ -99,12 +100,16 @@ namespace AnaSound
         {
           if (!AudioDatei.Ende())
           {
-            fc = AudioDatei.AudioReader.ReadNextSampleFrame();
+            (fc, istNull) = AudioDatei.SafeReadNext();
+            if (istNull)
+              break;
             f = AudioDatei.Mono ? fc[0] : (float)((fc[0] + fc[1]) * 0.5);
             p += f * f;
             NrSampleAusDatei++;
           }
         }
+        if (istNull)
+          break;
         p /= nSplIntervall;
         f = (p > 0) ? (float)(10.0 * Math.Log10(p)) : (float)-60.0;
         Linie.Points.Add(new DataPoint(NrAbschnitt * DauerIntervall, f));

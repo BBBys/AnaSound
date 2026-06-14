@@ -42,17 +42,22 @@ namespace AnaSound
       ;
       while (!AudioDatei.Ende())//für jedes Sample
       {
+        bool istNull = false;
         float f;
         float[] fc;// = new float[2];
         splmax = splmin = 0;
-        for (int j = 0; j < splx; j++)//so viel Samples
+        for (int j = 0; j < splx; j++)//so viel Samples für eien Bildpunkt
           if (!AudioDatei.Ende())
           {
-            fc = AudioDatei.AudioReader.ReadNextSampleFrame();
+            (fc,istNull) = AudioDatei.SafeReadNext();
+            if (istNull)
+              break;
             f = AudioDatei.Mono ? fc[0] : (fc[0] + fc[1]) * (float)0.5;
             splmax = Math.Max(splmax, f);
             splmin = Math.Min(splmin, f);
           }
+        if (istNull)
+          break;
         Area.Points.Add(new DataPoint(i * intervall, splmax));
         Area.Points2.Add(new DataPoint(i * intervall, splmin));
         i++;

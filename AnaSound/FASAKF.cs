@@ -74,7 +74,11 @@ namespace AnaSound
       nAKFsBerechnet = 0;
       ///Puffer vorbelegen
       for (ulong i = 0; i < nRingPuffer; i++)//Signal einlesen
-        ringPuffer[i] = AudioDatei.ReadNextMono();
+      {
+        bool istNull;
+        (ringPuffer[i], istNull) = AudioDatei.ReadNextMono();
+        ///im Fall istNull wird automatisch 0 zurückgegeben
+      }
       Debug.WriteLine(ringPuffer.Sum() / nRingPuffer);
       //for Ringpuffer vorbelegen
       //Puffer ist voll
@@ -115,13 +119,15 @@ namespace AnaSound
         nAKFsBerechnet++;
         for (ulong nWeiter = 0; nWeiter < nLagsAkf; nWeiter++)
         {
+          bool istNull;
           //und jeweils einen Signalwert weiter, dazu:
           //den Wert vorne überschreiben
-          ringPuffer[PufferZeiger] = AudioDatei.ReadNextMono();
+          (ringPuffer[PufferZeiger], istNull) = AudioDatei.ReadNextMono();
           //dann den Anfangspunkt eins weiter und
           //der neue Wert wird der Letzte in der Kette
           PufferZeiger = (PufferZeiger + 1) % nRingPuffer;
         }
+        Debug.WriteLine(nAKFsBerechnet);
       } while (!AudioDatei.Ende());
       Width = 1000;
       Height = 300;

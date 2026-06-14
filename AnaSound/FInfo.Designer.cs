@@ -46,11 +46,16 @@
             this.lGleich = new System.Windows.Forms.Label();
             this.lMax = new System.Windows.Forms.Label();
             this.lMin = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lWarn = new System.Windows.Forms.Label();
+            this.lFehl = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.pUnten.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -59,23 +64,23 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tslAus,
             this.tslGleich});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 532);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 537);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 18, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(542, 30);
+            this.statusStrip1.Size = new System.Drawing.Size(542, 25);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // tslAus
             // 
             this.tslAus.Name = "tslAus";
-            this.tslAus.Size = new System.Drawing.Size(128, 25);
+            this.tslAus.Size = new System.Drawing.Size(98, 20);
             this.tslAus.Text = "Aussteuerung";
             // 
             // tslGleich
             // 
             this.tslGleich.Name = "tslGleich";
-            this.tslGleich.Size = new System.Drawing.Size(112, 25);
+            this.tslGleich.Size = new System.Drawing.Size(87, 20);
             this.tslGleich.Text = "Gleichanteil";
             // 
             // pUnten
@@ -83,7 +88,7 @@
             this.pUnten.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pUnten.Controls.Add(this.bClose);
             this.pUnten.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pUnten.Location = new System.Drawing.Point(0, 490);
+            this.pUnten.Location = new System.Drawing.Point(0, 495);
             this.pUnten.Margin = new System.Windows.Forms.Padding(4);
             this.pUnten.Name = "pUnten";
             this.pUnten.Size = new System.Drawing.Size(542, 42);
@@ -250,12 +255,63 @@
             this.lMin.TabIndex = 3;
             this.lMin.Text = "min";
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label1);
+            this.groupBox4.Controls.Add(this.lWarn);
+            this.groupBox4.Controls.Add(this.lFehl);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox4.Location = new System.Drawing.Point(0, 306);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox4.Size = new System.Drawing.Size(542, 88);
+            this.groupBox4.TabIndex = 5;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Kommentar";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 60);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(19, 20);
+            this.label1.TabIndex = 5;
+            this.label1.Text = " ";
+            // 
+            // lWarn
+            // 
+            this.lWarn.AutoSize = true;
+            this.lWarn.BackColor = System.Drawing.Color.Yellow;
+            this.lWarn.Location = new System.Drawing.Point(9, 20);
+            this.lWarn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lWarn.Name = "lWarn";
+            this.lWarn.Size = new System.Drawing.Size(49, 20);
+            this.lWarn.TabIndex = 4;
+            this.lWarn.Text = "Warn";
+            this.lWarn.Visible = false;
+            // 
+            // lFehl
+            // 
+            this.lFehl.AutoSize = true;
+            this.lFehl.BackColor = System.Drawing.Color.Red;
+            this.lFehl.ForeColor = System.Drawing.Color.White;
+            this.lFehl.Location = new System.Drawing.Point(9, 40);
+            this.lFehl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lFehl.Name = "lFehl";
+            this.lFehl.Size = new System.Drawing.Size(49, 20);
+            this.lFehl.TabIndex = 3;
+            this.lFehl.Text = "Fehl";
+            this.lFehl.Visible = false;
+            // 
             // FInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(542, 562);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -276,6 +332,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -301,5 +359,9 @@
     private System.Windows.Forms.Label lGleich;
     private System.Windows.Forms.ToolStripStatusLabel tslAus;
     private System.Windows.Forms.ToolStripStatusLabel tslGleich;
+    private System.Windows.Forms.GroupBox groupBox4;
+    private System.Windows.Forms.Label label1;
+    private System.Windows.Forms.Label lWarn;
+    private System.Windows.Forms.Label lFehl;
   }
 }

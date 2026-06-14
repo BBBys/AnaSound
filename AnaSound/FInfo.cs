@@ -41,7 +41,14 @@ namespace AnaSound
         (datei.SigMax > 0.8 && datei.SigMin < -0.8) ? Color.Lime : Color.Red;
       tslGleich.BackColor =
         (Math.Abs(datei.Mittel) < 0.001) ? Color.Lime : Color.Red;
-
+      tslAus.ForeColor =
+              (datei.SigMax > 0.8 && datei.SigMin < -0.8) ? Color.Black : Color.White;
+      tslGleich.ForeColor =
+        (Math.Abs(datei.Mittel) < 0.001) ? Color.Black: Color.White;
+      if (datei.HatFehler)
+      { lFehl.Visible = true; lFehl.Text = datei.FehlerText; }
+      if (datei.HatWarnung)
+      { lWarn.Visible = true; lWarn.Text = datei.WarnungText; }
     }
   }
 }
