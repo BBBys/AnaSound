@@ -16,6 +16,13 @@ Erzeugt unterschiedliche Signale
 * KKF rechts - links
 * adaptives FIR-Filter 
 * Audio Streamkopplung
+* AnaSound: 
+	* Umgang mit Dateien, bei denen der letzte Block unvollständig ist.
+Diese geben beim Einlesen null-Bytes zurück. Nicht an alle Stellen im Programm ist das 
+ordentlich berücksichtigt.
+	* Umgang mit großen Dateien / langen Audioaufnahmmen. Da dauern manche Operationen
+zu lange und sollten entweder warnen oder die Berechnungen verkürzen.
+
 # Quellen
 * Meyer (2014): Signalverarbeitung : Analoge und digitale Signale, Systeme und Filter
 * Microsoft Copilot: Vorschläge für die Implementierung von Funktionen
