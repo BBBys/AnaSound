@@ -3,11 +3,20 @@
 Analyseprogramm: Informationen über Wave-Dateien
 Zeitbereich: Signal, Leistung, AKF.
 Frequenzbereich: FFT, Leistungsdichtespektrum, Spektrogramm. 
+### Fehler
+Frequenzachse im Spektrogramm falsch!
 ## FIR-Filter
 Audiosignal mit FIR-Filter bearbeiten.
 ## Testsignal
 Erzeugt unterschiedliche Signale
-
+## Fax
+Dekodiert Fax-Signale.
+## ASHilfen
+Unterstützung.
+### class ASDatei
+- ASDatei(Dateiname): öffnen
+- (uLong) sRate: Sample Rate, Samples oder Paare / s
+- (float, bool) ReadNextMono()
 # Weiteres
 ## verwendet
 * NAudio

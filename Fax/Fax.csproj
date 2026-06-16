@@ -85,5 +85,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ASHilfen\ASHilfen.csproj">
+      <Project>{afd13a90-0803-400f-a81f-c191c825e0b5}</Project>
+      <Name>ASHilfen</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
