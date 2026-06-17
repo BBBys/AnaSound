@@ -12,7 +12,8 @@ namespace ASHilfen
     /// 343,2 m/s (1236 km/h) in trockener Luft von 20 °C [Wikipedia]
     /// </summary>
     public readonly double Schallgewindigkeit = 343.2;
-
+    //-----
+    //Code
     public WaveFileWriter AudioWriter { get; private set; }
     public WaveFileReader AudioReader { get; private set; }
     public string DateimitPfad { get; private set; }

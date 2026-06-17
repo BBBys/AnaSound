@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIRFilter", "FIRFilter\FIRF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fax", "Fax\Fax.csproj", "{1EC213F2-9683-4234-AB1B-C1628480EC7F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTTY", "RTTY\RTTY.csproj", "{42FA9A7A-F51E-48C7-8A9D-D25D234953FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{1EC213F2-9683-4234-AB1B-C1628480EC7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EC213F2-9683-4234-AB1B-C1628480EC7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EC213F2-9683-4234-AB1B-C1628480EC7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42FA9A7A-F51E-48C7-8A9D-D25D234953FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42FA9A7A-F51E-48C7-8A9D-D25D234953FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42FA9A7A-F51E-48C7-8A9D-D25D234953FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42FA9A7A-F51E-48C7-8A9D-D25D234953FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

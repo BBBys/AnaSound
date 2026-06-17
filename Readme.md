@@ -9,12 +9,15 @@ Frequenzachse im Spektrogramm falsch!
 Audiosignal mit FIR-Filter bearbeiten.
 ## Testsignal
 Erzeugt unterschiedliche Signale
+## RTTY
+Dekodiert Fernschreiber-Signale.
 ## Fax
 Dekodiert Fax-Signale.
 ## ASHilfen
 Unterstützung.
+### class Goertzel
 ### class ASDatei
-- ASDatei(Dateiname): öffnen
+- ASDatei(Dateiname): öffnen. Legt keinen Buffer an, deshalb ist Dispose() nicht notwendig.
 - (uLong) sRate: Sample Rate, Samples oder Paare / s
 - (float, bool) ReadNextMono()
 # Weiteres

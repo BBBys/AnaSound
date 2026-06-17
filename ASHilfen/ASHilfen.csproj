@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ASDatei.cs" />
+    <Compile Include="Goertzel.cs" />
     <Compile Include="Technisches.cs" />
     <Compile Include="FensterFktn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
