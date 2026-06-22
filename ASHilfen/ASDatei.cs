@@ -170,6 +170,7 @@ namespace ASHilfen
         MittelR /= NSpl;
         Mittel = (MittelR + MittelL) / 2.0;
       }
+      AudioReader.Position = 0;
     }
 
     private void WavInfo()

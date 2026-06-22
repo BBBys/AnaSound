@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ASHilfen
 {
@@ -27,7 +23,7 @@ namespace ASHilfen
       ulong sampleRate,
       double targetFreq)
     {
-      int end;
+      ulong end;
       double omega, sine, cosine, coeff, real, imag;
       double q0, q1, q2;
       omega = 2.0 * Math.PI * targetFreq / (double)sampleRate;
@@ -39,9 +35,12 @@ namespace ASHilfen
       q1 = 0.0;
       q2 = 0.0;
 
-      end = Math.Min(start + length, samples.Length);
+      //end = Math.Min(start + length, samples.Length);
+      end = start + length;
+      if ((int)end > samples.Length)
+        end =(ulong) samples.Length;
 
-      for (int i = start; i < end; i++)
+      for (int i = (int)start; i < (int)end; i++)
       {
         q0 = samples[i] + coeff * q1 - q2;
         q2 = q1;

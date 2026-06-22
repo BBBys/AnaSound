@@ -17,8 +17,10 @@ namespace RTTY
     // gemessen 578, 641 Hz, ittel 609,5 -> 567, 652
     //const double FreqBlack = 364;// 1500.0;  // "schwarz"
     //const double FreqWhite = 804;// 2300.0;  // "weiß"
-    const double MARK = 567;// gemessen "schwarz"
-    const double SPACE = 652;// gemessen "weiß"
+    //const double MARK = 567;// gemessen "schwarz"
+    //const double SPACE = 652;// gemessen "weiß"
+    const double MARK = 474;// gemessen "schwarz"
+    const double SPACE = 553;// gemessen "weiß"
     private static readonly ulong maxToken = 99999;
     static readonly Dictionary<int, string> Letters = new Dictionary<int, string>()
     {
@@ -107,9 +109,9 @@ namespace RTTY
       //-----------------
       //alle Berechnungen
       sRate = Audiodatei.SRate;
-      smpPerToken = (uint)((double)sRate / (double)Baud + .5);
+      smpPerToken = (uint)(((double)sRate / (double)Baud) + .5);
       totalToken = Math.Min(maxToken,(ulong) samples.Length / smpPerToken);
-      smpPerBit = (uint)((double)sRate / (double)Baud / 8.0 + .5);
+      smpPerBit = (uint)((((double)sRate / (double)Baud )/ 7.0) + .5);//5 + Start + 2 Stop
       totalBits =(ulong)Math.Floor((double) samples.Length /(double) smpPerBit);
 
       Console.WriteLine($"Samples: {samples.Length},\tSampleRate: {sRate}");
