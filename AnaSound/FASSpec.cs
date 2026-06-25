@@ -10,7 +10,7 @@ namespace AnaSound
 {
   public partial class FASSpec : Form
   {
-    private bool kHz5 = false, Harmon = false;
+    private bool kHz5 = false, kHz2 = false, Harmon = false;
     private int nMittel = 1;
     private int FFTExp = 9;
     private double ÜberlappAnteil = 5.0 / 6.0;
@@ -150,7 +150,16 @@ namespace AnaSound
         Unit = "s",
         Title = "Zeit"
       });
-      if (kHz5)
+      if (kHz2)
+        myModel.Axes.Add(new LogarithmicAxis
+        {
+          AbsoluteMinimum = HzProLinie / 1000,
+          AbsoluteMaximum = .2,
+          Position = AxisPosition.Left,
+          Unit = "kHz",
+          Title = "Frequenz (max 2)"
+        });
+      else if (kHz5)
         myModel.Axes.Add(new LogarithmicAxis
         {
           AbsoluteMinimum = HzProLinie / 1000,
@@ -200,6 +209,11 @@ namespace AnaSound
           break;
         case "5 kHz":
           kHz5 = true;
+          kHz2 = false;
+          break;
+        case "2 kHz":
+          kHz2 = true;
+          kHz5 = false;
           break;
         case "1/6":
           ÜberlappAnteil = 1.0 / 6.0;
@@ -221,6 +235,7 @@ namespace AnaSound
           break;
         case "Max.":
           kHz5 = false;
+          kHz2 = false;
           break;
         case "Harmon.":
           Harmon = !Harmon;

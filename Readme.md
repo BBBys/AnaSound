@@ -11,10 +11,6 @@ Audiosignal mit FIR-Filter bearbeiten.
 Erzeugt unterschiedliche Signale
 ## RTTY
 Dekodiert Fernschreiber-Signale.
-## FSKTrack
-Statistik über FSK-Signale
-## Fax
-Dekodiert Fax-Signale.
 ## ASHilfen
 Unterstützung.
 ### class Goertzel
@@ -41,5 +37,6 @@ zu lange und sollten entweder warnen oder die Berechnungen verkürzen.
 * Meyer (2014): Signalverarbeitung : Analoge und digitale Signale, Systeme und Filter
 * Microsoft Copilot: Vorschläge für die Implementierung von Funktionen
 * [FIR-Filter von Wdwd - Eigenes Werk, CC BY-SA 3.0](https://commons.wikimedia.org/w/index.php?curid=3870817)
-* [Fensterfunktion, Wikipedia](https://de.wikipedia.org/w/index.php?title=Fensterfunktion&oldid=240252100)
-* [Schallgeschwindigkeit, Wikipedia](https://de.wikipedia.org/w/index.php?title=Schallgeschwindigkeit&oldid=250821980)
+* [Fensterfunktion.       In: Wikipedia – Die freie Enzyklopädie. Bearbeitungsstand: 16. Dezember 2023, 22:56 UTC.](https://de.wikipedia.org/w/index.php?title=Fensterfunktion&oldid=240252100) (Abgerufen: 23. Juni 2026, 09:06 UTC)
+* [Goertzel-Algorithmus.  In: Wikipedia – Die freie Enzyklopädie. Bearbeitungsstand: 16. Mai 2026, 11:14 UTC.](https://de.wikipedia.org/w/index.php?title=Goertzel-Algorithmus&oldid=267115219) (Abgerufen: 23. Juni 2026, 09:03 UTC) 
+* [Schallgeschwindigkeit. In: Wikipedia – Die freie Enzyklopädie. Bearbeitungsstand: 30. November 2024, 10:34 UTC.](https://de.wikipedia.org/w/index.php?title=Schallgeschwindigkeit&oldid=250821980) (Abgerufen: 23. Juni 2026, 09:08 UTC) 
