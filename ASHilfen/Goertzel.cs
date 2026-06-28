@@ -20,7 +20,8 @@ namespace ASHilfen
       float[] samples,
       ulong sampleRate,
       double testFreq)
-    {return Energie(samples,0, (ulong)samples.Length, sampleRate, testFreq);
+    {
+      return Energie(samples, 0, (ulong)samples.Length, sampleRate, testFreq);
     }
     public static double Energie(
       float[] samples,
@@ -56,7 +57,7 @@ namespace ASHilfen
         end = (ulong)samples.Length;
       /*---
        * rückwärts:
-       */ 
+       */
       for (ulong i = end - 1; i >= start + 1; i--)
       {
         q0 = samples[i] + cosOmega2 * q1 - q2;

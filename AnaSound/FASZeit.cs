@@ -49,7 +49,7 @@ namespace AnaSound
         for (int j = 0; j < splx; j++)//so viel Samples für eien Bildpunkt
           if (!AudioDatei.Ende())
           {
-            (fc,istNull) = AudioDatei.SafeReadNext();
+            (fc, istNull) = AudioDatei.SafeReadNext();
             if (istNull)
               break;
             f = AudioDatei.Mono ? fc[0] : (fc[0] + fc[1]) * (float)0.5;

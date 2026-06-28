@@ -44,7 +44,7 @@ namespace AnaSound
       tslAus.ForeColor =
               (datei.SigMax > 0.8 && datei.SigMin < -0.8) ? Color.Black : Color.White;
       tslGleich.ForeColor =
-        (Math.Abs(datei.Mittel) < 0.001) ? Color.Black: Color.White;
+        (Math.Abs(datei.Mittel) < 0.001) ? Color.Black : Color.White;
       if (datei.HatFehler)
       { lFehl.Visible = true; lFehl.Text = datei.FehlerText; }
       if (datei.HatWarnung)

@@ -10,7 +10,7 @@ namespace AnaSound
 {
   public partial class FASSpec : Form
   {
-    private bool kHz5 = false, kHz2 = false, Harmon = false;
+    private bool kHz5 = false, kHz2 = false, kHz02 = false, Harmon = false;
     private int nMittel = 1;
     private int FFTExp = 9;
     private double ÜberlappAnteil = 5.0 / 6.0;
@@ -150,17 +150,17 @@ namespace AnaSound
         Unit = "s",
         Title = "Zeit"
       });
-      if (kHz2)
-        myModel.Axes.Add(new LogarithmicAxis
+      if (kHz02)
+        myModel.Axes.Add(new LinearAxis
         {
           AbsoluteMinimum = HzProLinie / 1000,
           AbsoluteMaximum = .2,
           Position = AxisPosition.Left,
           Unit = "kHz",
-          Title = "Frequenz (max 2)"
+          Title = "Frequenz (max 0,200)"
         });
       else if (kHz5)
-        myModel.Axes.Add(new LogarithmicAxis
+        myModel.Axes.Add(new LinearAxis
         {
           AbsoluteMinimum = HzProLinie / 1000,
           AbsoluteMaximum = 5,
@@ -169,7 +169,7 @@ namespace AnaSound
           Title = "Frequenz"
         });
       else
-        myModel.Axes.Add(new LogarithmicAxis
+        myModel.Axes.Add(new LinearAxis
         {
           AbsoluteMaximum = AudioDatei.SRate / 2000,
           AbsoluteMinimum = HzProLinie / 1000,
@@ -208,11 +208,13 @@ namespace AnaSound
           FFTExp = 12;
           break;
         case "5 kHz":
+          kHz02 = false;
           kHz5 = true;
           kHz2 = false;
           break;
-        case "2 kHz":
-          kHz2 = true;
+        case "200 Hz":
+          kHz02 = true;
+          kHz2 = false;
           kHz5 = false;
           break;
         case "1/6":
@@ -235,7 +237,7 @@ namespace AnaSound
           break;
         case "Max.":
           kHz5 = false;
-          kHz2 = false;
+          kHz02 = false;
           break;
         case "Harmon.":
           Harmon = !Harmon;
