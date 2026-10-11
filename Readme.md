@@ -7,6 +7,9 @@ Frequenzbereich: FFT, Leistungsdichtespektrum, Spektrogramm.
 Frequenzachse im Spektrogramm falsch!
 ## FIR-Filter
 Audiosignal mit FIR-Filter bearbeiten.
+Noch nicht fertig: 
+- Bearbeitung von Stereo-Files funktioniert nicht
+- nicht getestet
 ## Testsignal
 Erzeugt unterschiedliche Signale
 ## RTTY
@@ -14,10 +17,26 @@ Dekodiert Fernschreiber-Signale.
 ## ASHilfen
 Unterstützung.
 ### class Goertzel
+
 ### class ASDatei
-- ASDatei(Dateiname): öffnen. Legt keinen Buffer an, deshalb ist Dispose() nicht notwendig.
-- (uLong) sRate: Sample Rate, Samples oder Paare / s
+####Überladungen:
+1) ASDatei(Dateiname): öffnen zum Lesen. Legt keinen Buffer an, deshalb ist Dispose() nicht notwendig.
+2) ASDatei(Dateiname, Abtastrate, Kanäle) Vorbereitung zum Schreiben.
+
+#### Funktionen zum Schreiben:
+1.a) void WriteSample(float spl1)
+
+1.b) void WriteSample(float spl1, float spl2)
+
+...
+
+99) void Flush()
+
+#### Eigenschaften:
+- (uLong) sRate: Sample Rate, 8.000, 11.250, ... 48.000 oder was sonst noch gültig ist; Mono-Samples oder Stereo-Paare / s
 - (float, bool) ReadNextMono()
+
+-------------------------
 # Weiteres
 ## verwendet
 * NAudio
