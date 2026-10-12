@@ -3,16 +3,22 @@
   <Profiles />
   <Settings>
     <Setting Name="SoundDatei" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Audio.wav</Value>
     </Setting>
     <Setting Name="SoundPfad" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">.</Value>
     </Setting>
     <Setting Name="FilterDatei" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">FIR.wav</Value>
     </Setting>
     <Setting Name="FilterPfad" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">.</Value>
+    </Setting>
+    <Setting Name="AusDatei" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Aus.wav</Value>
+    </Setting>
+    <Setting Name="AusPfad" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.</Value>
     </Setting>
   </Settings>
 </SettingsFile>

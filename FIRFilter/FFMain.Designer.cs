@@ -32,11 +32,22 @@
       this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.öffneSigalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.öffneFilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.tsiÖffneAusgabedatei = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
       this.schließeSignalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.schließeFilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.schließeAusgabedateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+      this.audioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.playToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.stopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+      this.filterPlayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.filterStopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.filterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.tsmiWendeFilterAn = new System.Windows.Forms.ToolStripMenuItem();
+      this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.statusStrip1 = new System.Windows.Forms.StatusStrip();
       this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
       this.tslDatei = new System.Windows.Forms.ToolStripStatusLabel();
@@ -57,13 +68,7 @@
       this.tslFFehler = new System.Windows.Forms.ToolStripStatusLabel();
       this.tslFWarnung = new System.Windows.Forms.ToolStripStatusLabel();
       this.ofdEingabe = new System.Windows.Forms.OpenFileDialog();
-      this.audioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.playToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.stopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-      this.filterPlayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.filterStopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.ofdAusgabe = new System.Windows.Forms.SaveFileDialog();
       this.menuStrip1.SuspendLayout();
       this.statusStrip1.SuspendLayout();
       this.SuspendLayout();
@@ -74,6 +79,7 @@
       this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dateiToolStripMenuItem,
             this.audioToolStripMenuItem,
+            this.filterToolStripMenuItem,
             this.aboutToolStripMenuItem});
       this.menuStrip1.Location = new System.Drawing.Point(0, 0);
       this.menuStrip1.Name = "menuStrip1";
@@ -86,20 +92,22 @@
       this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.öffneSigalToolStripMenuItem,
             this.öffneFilterToolStripMenuItem,
+            this.tsiÖffneAusgabedatei,
             this.toolStripSeparator2,
             this.schließeSignalToolStripMenuItem,
             this.schließeFilterToolStripMenuItem,
+            this.schließeAusgabedateiToolStripMenuItem,
             this.toolStripSeparator1,
             this.toolStripMenuItem2});
       this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
-      this.dateiToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
+      this.dateiToolStripMenuItem.Size = new System.Drawing.Size(57, 24);
       this.dateiToolStripMenuItem.Text = "Datei";
       // 
       // öffneSigalToolStripMenuItem
       // 
       this.öffneSigalToolStripMenuItem.Name = "öffneSigalToolStripMenuItem";
       this.öffneSigalToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-      this.öffneSigalToolStripMenuItem.Size = new System.Drawing.Size(340, 26);
+      this.öffneSigalToolStripMenuItem.Size = new System.Drawing.Size(326, 24);
       this.öffneSigalToolStripMenuItem.Text = "öffne Signal";
       this.öffneSigalToolStripMenuItem.Click += new System.EventHandler(this.öffneSigalToolStripMenuItem_Click);
       // 
@@ -108,20 +116,27 @@
       this.öffneFilterToolStripMenuItem.Name = "öffneFilterToolStripMenuItem";
       this.öffneFilterToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.O)));
-      this.öffneFilterToolStripMenuItem.Size = new System.Drawing.Size(340, 26);
+      this.öffneFilterToolStripMenuItem.Size = new System.Drawing.Size(326, 24);
       this.öffneFilterToolStripMenuItem.Text = "öffne Filter";
       this.öffneFilterToolStripMenuItem.Click += new System.EventHandler(this.öffneFilterToolStripMenuItem_Click);
+      // 
+      // tsiÖffneAusgabedatei
+      // 
+      this.tsiÖffneAusgabedatei.Name = "tsiÖffneAusgabedatei";
+      this.tsiÖffneAusgabedatei.Size = new System.Drawing.Size(326, 24);
+      this.tsiÖffneAusgabedatei.Text = "öffne Ausgabedatei";
+      this.tsiÖffneAusgabedatei.Click += new System.EventHandler(this.tsiÖffneAusgabedatei_Click);
       // 
       // toolStripSeparator2
       // 
       this.toolStripSeparator2.Name = "toolStripSeparator2";
-      this.toolStripSeparator2.Size = new System.Drawing.Size(337, 6);
+      this.toolStripSeparator2.Size = new System.Drawing.Size(323, 6);
       // 
       // schließeSignalToolStripMenuItem
       // 
       this.schließeSignalToolStripMenuItem.Name = "schließeSignalToolStripMenuItem";
       this.schließeSignalToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-      this.schließeSignalToolStripMenuItem.Size = new System.Drawing.Size(340, 26);
+      this.schließeSignalToolStripMenuItem.Size = new System.Drawing.Size(326, 24);
       this.schließeSignalToolStripMenuItem.Text = "schließe Signal";
       this.schließeSignalToolStripMenuItem.Click += new System.EventHandler(this.schließeSignalToolStripMenuItem_Click);
       // 
@@ -130,21 +145,98 @@
       this.schließeFilterToolStripMenuItem.Name = "schließeFilterToolStripMenuItem";
       this.schließeFilterToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.X)));
-      this.schließeFilterToolStripMenuItem.Size = new System.Drawing.Size(340, 26);
+      this.schließeFilterToolStripMenuItem.Size = new System.Drawing.Size(326, 24);
       this.schließeFilterToolStripMenuItem.Text = "schließe Filter";
+      this.schließeFilterToolStripMenuItem.Click += new System.EventHandler(this.schließeFilterToolStripMenuItem_Click);
+      // 
+      // schließeAusgabedateiToolStripMenuItem
+      // 
+      this.schließeAusgabedateiToolStripMenuItem.Name = "schließeAusgabedateiToolStripMenuItem";
+      this.schließeAusgabedateiToolStripMenuItem.Size = new System.Drawing.Size(326, 24);
+      this.schließeAusgabedateiToolStripMenuItem.Text = "schließe Ausgabedatei";
+      this.schließeAusgabedateiToolStripMenuItem.Click += new System.EventHandler(this.schließeAusgabedateiToolStripMenuItem_Click);
       // 
       // toolStripSeparator1
       // 
       this.toolStripSeparator1.Name = "toolStripSeparator1";
-      this.toolStripSeparator1.Size = new System.Drawing.Size(337, 6);
+      this.toolStripSeparator1.Size = new System.Drawing.Size(323, 6);
       // 
       // toolStripMenuItem2
       // 
       this.toolStripMenuItem2.Name = "toolStripMenuItem2";
       this.toolStripMenuItem2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-      this.toolStripMenuItem2.Size = new System.Drawing.Size(340, 26);
+      this.toolStripMenuItem2.Size = new System.Drawing.Size(326, 24);
       this.toolStripMenuItem2.Text = "beende";
       this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+      // 
+      // audioToolStripMenuItem
+      // 
+      this.audioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.playToolStripMenuItem,
+            this.stopToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.filterPlayToolStripMenuItem,
+            this.filterStopToolStripMenuItem});
+      this.audioToolStripMenuItem.Name = "audioToolStripMenuItem";
+      this.audioToolStripMenuItem.Size = new System.Drawing.Size(61, 24);
+      this.audioToolStripMenuItem.Text = "Audio";
+      // 
+      // playToolStripMenuItem
+      // 
+      this.playToolStripMenuItem.Name = "playToolStripMenuItem";
+      this.playToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+      this.playToolStripMenuItem.Size = new System.Drawing.Size(301, 24);
+      this.playToolStripMenuItem.Text = "play";
+      // 
+      // stopToolStripMenuItem
+      // 
+      this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
+      this.stopToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+      this.stopToolStripMenuItem.Size = new System.Drawing.Size(301, 24);
+      this.stopToolStripMenuItem.Text = "stop";
+      // 
+      // toolStripSeparator3
+      // 
+      this.toolStripSeparator3.Name = "toolStripSeparator3";
+      this.toolStripSeparator3.Size = new System.Drawing.Size(298, 6);
+      // 
+      // filterPlayToolStripMenuItem
+      // 
+      this.filterPlayToolStripMenuItem.Name = "filterPlayToolStripMenuItem";
+      this.filterPlayToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.P)));
+      this.filterPlayToolStripMenuItem.Size = new System.Drawing.Size(301, 24);
+      this.filterPlayToolStripMenuItem.Text = "Filter play";
+      // 
+      // filterStopToolStripMenuItem
+      // 
+      this.filterStopToolStripMenuItem.Name = "filterStopToolStripMenuItem";
+      this.filterStopToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+      this.filterStopToolStripMenuItem.Size = new System.Drawing.Size(301, 24);
+      this.filterStopToolStripMenuItem.Text = "Filter stop";
+      // 
+      // filterToolStripMenuItem
+      // 
+      this.filterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiWendeFilterAn});
+      this.filterToolStripMenuItem.Name = "filterToolStripMenuItem";
+      this.filterToolStripMenuItem.Size = new System.Drawing.Size(54, 24);
+      this.filterToolStripMenuItem.Text = "Filter";
+      // 
+      // tsmiWendeFilterAn
+      // 
+      this.tsmiWendeFilterAn.Name = "tsmiWendeFilterAn";
+      this.tsmiWendeFilterAn.Size = new System.Drawing.Size(179, 24);
+      this.tsmiWendeFilterAn.Text = "wende Filter an";
+      this.tsmiWendeFilterAn.Click += new System.EventHandler(this.tsmiWendeFilterAn_Click);
+      // 
+      // aboutToolStripMenuItem
+      // 
+      this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+      this.aboutToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
+      this.aboutToolStripMenuItem.Text = "About";
+      this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
       // 
       // statusStrip1
       // 
@@ -168,9 +260,9 @@
             this.tslFDauer,
             this.tslFFehler,
             this.tslFWarnung});
-      this.statusStrip1.Location = new System.Drawing.Point(0, 419);
+      this.statusStrip1.Location = new System.Drawing.Point(0, 420);
       this.statusStrip1.Name = "statusStrip1";
-      this.statusStrip1.Size = new System.Drawing.Size(884, 31);
+      this.statusStrip1.Size = new System.Drawing.Size(884, 30);
       this.statusStrip1.TabIndex = 2;
       // 
       // toolStripStatusLabel1
@@ -222,7 +314,7 @@
       this.tslFehler.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.tslFehler.ForeColor = System.Drawing.Color.Yellow;
       this.tslFehler.Name = "tslFehler";
-      this.tslFehler.Size = new System.Drawing.Size(19, 25);
+      this.tslFehler.Size = new System.Drawing.Size(20, 25);
       this.tslFehler.Text = "_";
       // 
       // tslWarnung
@@ -230,7 +322,7 @@
       this.tslWarnung.BackColor = System.Drawing.Color.Yellow;
       this.tslWarnung.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.tslWarnung.Name = "tslWarnung";
-      this.tslWarnung.Size = new System.Drawing.Size(19, 25);
+      this.tslWarnung.Size = new System.Drawing.Size(20, 25);
       this.tslWarnung.Text = "_";
       // 
       // toolStripStatusLabel2
@@ -282,7 +374,7 @@
       this.tslFFehler.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.tslFFehler.ForeColor = System.Drawing.Color.Yellow;
       this.tslFFehler.Name = "tslFFehler";
-      this.tslFFehler.Size = new System.Drawing.Size(19, 25);
+      this.tslFFehler.Size = new System.Drawing.Size(20, 25);
       this.tslFFehler.Text = "_";
       // 
       // tslFWarnung
@@ -290,66 +382,20 @@
       this.tslFWarnung.BackColor = System.Drawing.Color.Yellow;
       this.tslFWarnung.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.tslFWarnung.Name = "tslFWarnung";
-      this.tslFWarnung.Size = new System.Drawing.Size(19, 25);
+      this.tslFWarnung.Size = new System.Drawing.Size(20, 25);
       this.tslFWarnung.Text = "_";
       // 
       // ofdEingabe
       // 
       this.ofdEingabe.DefaultExt = "wav";
       // 
-      // audioToolStripMenuItem
+      // ofdAusgabe
       // 
-      this.audioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.playToolStripMenuItem,
-            this.stopToolStripMenuItem,
-            this.toolStripSeparator3,
-            this.filterPlayToolStripMenuItem,
-            this.filterStopToolStripMenuItem});
-      this.audioToolStripMenuItem.Name = "audioToolStripMenuItem";
-      this.audioToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
-      this.audioToolStripMenuItem.Text = "Audio";
-      // 
-      // playToolStripMenuItem
-      // 
-      this.playToolStripMenuItem.Name = "playToolStripMenuItem";
-      this.playToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-      this.playToolStripMenuItem.Size = new System.Drawing.Size(315, 26);
-      this.playToolStripMenuItem.Text = "play";
-      // 
-      // stopToolStripMenuItem
-      // 
-      this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
-      this.stopToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-      this.stopToolStripMenuItem.Size = new System.Drawing.Size(315, 26);
-      this.stopToolStripMenuItem.Text = "stop";
-      // 
-      // toolStripSeparator3
-      // 
-      this.toolStripSeparator3.Name = "toolStripSeparator3";
-      this.toolStripSeparator3.Size = new System.Drawing.Size(312, 6);
-      // 
-      // filterPlayToolStripMenuItem
-      // 
-      this.filterPlayToolStripMenuItem.Name = "filterPlayToolStripMenuItem";
-      this.filterPlayToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.P)));
-      this.filterPlayToolStripMenuItem.Size = new System.Drawing.Size(315, 26);
-      this.filterPlayToolStripMenuItem.Text = "Filter play";
-      // 
-      // filterStopToolStripMenuItem
-      // 
-      this.filterStopToolStripMenuItem.Name = "filterStopToolStripMenuItem";
-      this.filterStopToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.S)));
-      this.filterStopToolStripMenuItem.Size = new System.Drawing.Size(315, 26);
-      this.filterStopToolStripMenuItem.Text = "Filter stop";
-      // 
-      // aboutToolStripMenuItem
-      // 
-      this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-      this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
-      this.aboutToolStripMenuItem.Text = "About";
-      this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+      this.ofdAusgabe.DefaultExt = "*.wav";
+      this.ofdAusgabe.FileName = "aus.wav";
+      this.ofdAusgabe.Filter = "Audio|*.wav";
+      this.ofdAusgabe.InitialDirectory = ".";
+      this.ofdAusgabe.Title = "Ausgabe Ergebnis gefiltert";
       // 
       // FFMain
       // 
@@ -361,6 +407,7 @@
       this.MainMenuStrip = this.menuStrip1;
       this.Name = "FFMain";
       this.Text = "FFMain";
+      this.Load += new System.EventHandler(this.FFMain_Load);
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();
       this.statusStrip1.ResumeLayout(false);
@@ -408,6 +455,11 @@
     private System.Windows.Forms.ToolStripMenuItem filterPlayToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem filterStopToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem filterToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem tsmiWendeFilterAn;
+    private System.Windows.Forms.ToolStripMenuItem tsiÖffneAusgabedatei;
+    private System.Windows.Forms.ToolStripMenuItem schließeAusgabedateiToolStripMenuItem;
+    private System.Windows.Forms.SaveFileDialog ofdAusgabe;
   }
 }
 

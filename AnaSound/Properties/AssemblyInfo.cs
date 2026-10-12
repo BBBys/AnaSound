@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("Sound")]
 [assembly: AssemblyDescription("Analyse von Sounddaten")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Burkhard Borys Vellmar")]
+[assembly: AssemblyCompany("B.Borys")]
 [assembly: AssemblyCopyright("Copyright © Borys 2024-2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -30,6 +30,6 @@ using System.Runtime.InteropServices;
 //      Buildnummer
 //      Revision
 //
-[assembly: AssemblyVersion("1.4.1.20")]
-[assembly: AssemblyFileVersion("1.4.1.20")]
+[assembly: AssemblyVersion("1.6.5.26")]
+[assembly: AssemblyFileVersion("1.6.5.26")]
 [assembly: NeutralResourcesLanguage("de-DE")]

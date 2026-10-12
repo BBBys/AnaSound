@@ -26,12 +26,12 @@
     <SupportUrl>https://github.com/BBBys/AnaSound/blob/main/Readme.md</SupportUrl>
     <TargetCulture>de-DE</TargetCulture>
     <ProductName>AudioAnalyse</ProductName>
-    <PublisherName>Burkhard Borys Vellmar</PublisherName>
+    <PublisherName>B.Borys</PublisherName>
     <SuiteName>Audio</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>21</ApplicationRevision>
-    <ApplicationVersion>1.4.1.%2a</ApplicationVersion>
+    <ApplicationRevision>27</ApplicationRevision>
+    <ApplicationVersion>1.6.5.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -46,7 +46,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <UseWinFormsOutOfProcDesigner>True</UseWinFormsOutOfProcDesigner>
-    <CodeAnalysisRuleSet>..\..\..\release.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\..\debug.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">

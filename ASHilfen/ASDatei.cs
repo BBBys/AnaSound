@@ -523,8 +523,10 @@ namespace ASHilfen
     }
     public void Dispose()
     {
+      AudioWriter?.Flush();
       AudioWriter?.Dispose();
       AudioWriter = null;
+      AudioReader?.Flush();
       AudioReader?.Dispose();
       AudioReader = null;
     }
