@@ -25,7 +25,7 @@ namespace AnaSound
     }
     private void Berechne()
     {
-      Debug.WriteLine($"Berechne{Dbcnt++}");
+      Debug.WriteLine($"Berechne {Dbcnt++}");
       float splmax, splmin;
       uint nPunkte, splx;
       if (AudioDatei == null)
@@ -101,7 +101,7 @@ namespace AnaSound
     }
     private void FASZeit_Shown(object sender, EventArgs e)
     {
-      Debug.WriteLine($"Shown{Dbcnt++}");
+      Debug.WriteLine($"Shown {Dbcnt++}");
       Berechne();
       Invalidate();
     }

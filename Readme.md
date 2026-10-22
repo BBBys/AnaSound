@@ -4,7 +4,8 @@ Analyseprogramm: Informationen über Wave-Dateien
 Zeitbereich: Signal, Leistung, AKF.
 Frequenzbereich: FFT, Leistungsdichtespektrum, Spektrogramm. 
 ### Fehler
-Frequenzachse im Spektrogramm falsch!
+-	Frequenzachse im Spektrogramm falsch!
+-	Das WAV-Format Extensible wird als gültig angenommen, ist aber nicht getestet (V1.6.6)
 ## FIR-Filter
 Audiosignal mit FIR-Filter bearbeiten.
 Noch nicht fertig: 
@@ -19,7 +20,7 @@ Unterstützung.
 ### class Goertzel
 
 ### class ASDatei
-####Überladungen:
+#### Überladungen:
 1) ASDatei(Dateiname): öffnen zum Lesen. Legt keinen Buffer an, deshalb ist Dispose() nicht notwendig.
 2) ASDatei(Dateiname, Abtastrate, Kanäle) Vorbereitung zum Schreiben.
 

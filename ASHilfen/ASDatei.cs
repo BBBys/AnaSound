@@ -177,7 +177,10 @@ namespace ASHilfen
 
     private void WavInfo()
     {
-      bool encoding = false;
+      /// <summary>
+      /// bkantes Format in der Wav-Datei
+      /// </summary>
+      bool encodingBekannt = false;
       AudioReader = new WaveFileReader(DateimitPfad);
       Encoding = "nicht ermittelt";
       switch (AudioReader.WaveFormat.Encoding)
@@ -186,7 +189,7 @@ namespace ASHilfen
           break;
         case WaveFormatEncoding.Pcm:
           Encoding = "PCM";
-          encoding = true;
+          encodingBekannt = true;
           break;
         case WaveFormatEncoding.Adpcm:
           Encoding = "ADPCM";
@@ -504,6 +507,9 @@ namespace ASHilfen
         case WaveFormatEncoding.Vorbis3P:
           break;
         case WaveFormatEncoding.Extensible:
+          encodingBekannt = true;
+          HatWarnung = true;
+          WarnungText = "Encoding Extensible nicht getestet";
           break;
         case WaveFormatEncoding.WAVE_FORMAT_DEVELOPMENT:
           break;
@@ -511,7 +517,7 @@ namespace ASHilfen
           Encoding = "anderes";
           break;
       }
-      NSpl = encoding ? (ulong)AudioReader.SampleCount : 0;
+      NSpl = encodingBekannt ? (ulong)AudioReader.SampleCount : 0;
       Len = (ulong)AudioReader.Length;
       SRate = (ulong)AudioReader.WaveFormat.SampleRate;
       BitProSample = (uint)AudioReader.WaveFormat.BitsPerSample;
